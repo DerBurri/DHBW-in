@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dhbwinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AchievedAchievement">
+          <Key>
+            <PropertyRef Name="UID_fk" />
+            <PropertyRef Name="AchID_fk" />
+          </Key>
+          <Property Name="UID_fk" Type="int" Nullable="false" />
+          <Property Name="AchID_fk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="AchID" />
+          </Key>
+          <Property Name="AchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="char" MaxLength="100" />
+          <Property Name="Description" Type="char" MaxLength="500" />
+          <Property Name="ExpPoints" Type="int" />
+          <Property Name="Reward" Type="int" />
+        </EntityType>
+        <EntityType Name="Bet">
+          <Key>
+            <PropertyRef Name="BetID" />
+          </Key>
+          <Property Name="BetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UID_fk2" Type="int" Nullable="false" />
+          <Property Name="Title" Type="char" MaxLength="50" />
+          <Property Name="ExpPoints" Type="int" />
+          <Property Name="Reward" Type="int" />
+          <Property Name="Description" Type="char" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="BetOptions">
+          <Key>
+            <PropertyRef Name="OptionsID" />
+          </Key>
+          <Property Name="OptionsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BetID" Type="int" />
+          <Property Name="Title" Type="char" MaxLength="50" />
+          <Property Name="Descpription" Type="char" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderID" Type="int" />
+          <Property Name="WorkerID" Type="int" />
+          <Property Name="Title" Type="char" MaxLength="50" />
+          <Property Name="Description" Type="char" MaxLength="50" />
+          <Property Name="Reward" Type="int" />
+          <Property Name="ExpPoints" Type="int" />
+        </EntityType>
+        <EntityType Name="Placement">
+          <Key>
+            <PropertyRef Name="PlacementID" />
+            <PropertyRef Name="BetID_fk" />
+            <PropertyRef Name="UID_fk" />
+          </Key>
+          <Property Name="PlacementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BetID_fk" Type="int" Nullable="false" />
+          <Property Name="UID_fk" Type="int" Nullable="false" />
+          <Property Name="OptionID_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="PLZ">
+          <Key>
+            <PropertyRef Name="PLZ" />
+          </Key>
+          <Property Name="PLZ" Type="int" Nullable="false" />
+          <Property Name="Ort" Type="char" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vorname" Type="char" MaxLength="25" />
+          <Property Name="Name" Type="char" MaxLength="25" />
+          <Property Name="E-Mail" Type="char" MaxLength="50" />
+          <Property Name="Street" Type="char" MaxLength="25" />
+          <Property Name="PLZ_fk" Type="int" />
+          <Property Name="ExpPoints" Type="int" />
+          <Property Name="PasswordHash" Type="char" MaxLength="500" />
+          <Property Name="walletbalance" Type="int" />
+          <Property Name="profilepicture" Type="image" />
+        </EntityType>
+        <Association Name="AchievedAchievement_Achievement_AchID_fk">
+          <End Role="Achievement" Type="Self.Achievement" Multiplicity="1" />
+          <End Role="AchievedAchievement" Type="Self.AchievedAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Achievement">
+              <PropertyRef Name="AchID" />
+            </Principal>
+            <Dependent Role="AchievedAchievement">
+              <PropertyRef Name="AchID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Bet_fk">
+          <End Role="Bet" Type="Self.Bet" Multiplicity="1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="BetID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="BetID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BetOptions_Bet_BetID_fk">
+          <End Role="Bet" Type="Self.Bet" Multiplicity="0..1" />
+          <End Role="BetOptions" Type="Self.BetOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="BetID" />
+            </Principal>
+            <Dependent Role="BetOptions">
+              <PropertyRef Name="BetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_User_UID_fk">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_worker_fk">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Placement_BetOptions_OptionsID_fk">
+          <End Role="BetOptions" Type="Self.BetOptions" Multiplicity="0..1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetOptions">
+              <PropertyRef Name="OptionsID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="OptionID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLZ_fk">
+          <End Role="PLZ" Type="Self.PLZ" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLZ">
+              <PropertyRef Name="PLZ" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PLZ_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UID_fk2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Bet" Type="Self.Bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Bet">
+              <PropertyRef Name="UID_fk2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_AchievedAchievement___fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AchievedAchievement" Type="Self.AchievedAchievement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="AchievedAchievement">
+              <PropertyRef Name="UID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="UID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dhbwinModelStoreContainer">
+          <EntitySet Name="AchievedAchievement" EntityType="Self.AchievedAchievement" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="Achievement" EntityType="Self.Achievement" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="Bet" EntityType="Self.Bet" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="BetOptions" EntityType="Self.BetOptions" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="Placement" EntityType="Self.Placement" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="PLZ" EntityType="Self.PLZ" Schema="dhbwin" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dhbwin" store:Type="Tables" />
+          <AssociationSet Name="AchievedAchievement_Achievement_AchID_fk" Association="Self.AchievedAchievement_Achievement_AchID_fk">
+            <End Role="Achievement" EntitySet="Achievement" />
+            <End Role="AchievedAchievement" EntitySet="AchievedAchievement" />
+          </AssociationSet>
+          <AssociationSet Name="Bet_fk" Association="Self.Bet_fk">
+            <End Role="Bet" EntitySet="Bet" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+          <AssociationSet Name="BetOptions_Bet_BetID_fk" Association="Self.BetOptions_Bet_BetID_fk">
+            <End Role="Bet" EntitySet="Bet" />
+            <End Role="BetOptions" EntitySet="BetOptions" />
+          </AssociationSet>
+          <AssociationSet Name="Job_User_UID_fk" Association="Self.Job_User_UID_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="Job_worker_fk" Association="Self.Job_worker_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="Placement_BetOptions_OptionsID_fk" Association="Self.Placement_BetOptions_OptionsID_fk">
+            <End Role="BetOptions" EntitySet="BetOptions" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+          <AssociationSet Name="PLZ_fk" Association="Self.PLZ_fk">
+            <End Role="PLZ" EntitySet="PLZ" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="UID_fk2" Association="Self.UID_fk2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Bet" EntitySet="Bet" />
+          </AssociationSet>
+          <AssociationSet Name="User_AchievedAchievement___fk" Association="Self.User_AchievedAchievement___fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="AchievedAchievement" EntitySet="AchievedAchievement" />
+          </AssociationSet>
+          <AssociationSet Name="User_fk" Association="Self.User_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dhbwinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Achievement">
+          <Key>
+            <PropertyRef Name="AchID" />
+          </Key>
+          <Property Name="AchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="ExpPoints" Type="Int32" />
+          <Property Name="Reward" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.AchievedAchievement" FromRole="Achievement" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Bet">
+          <Key>
+            <PropertyRef Name="BetID" />
+          </Key>
+          <Property Name="BetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UID_fk2" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="ExpPoints" Type="Int32" />
+          <Property Name="Reward" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Placement" Relationship="Self.Bet_fk" FromRole="Bet" ToRole="Placement" />
+          <NavigationProperty Name="BetOptions" Relationship="Self.BetOptions_Bet_BetID_fk" FromRole="Bet" ToRole="BetOptions" />
+          <NavigationProperty Name="User" Relationship="Self.UID_fk2" FromRole="Bet" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BetOptions">
+          <Key>
+            <PropertyRef Name="OptionsID" />
+          </Key>
+          <Property Name="OptionsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BetID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Descpription" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Bet" Relationship="Self.BetOptions_Bet_BetID_fk" FromRole="BetOptions" ToRole="Bet" />
+          <NavigationProperty Name="Placement" Relationship="Self.Placement_BetOptions_OptionsID_fk" FromRole="BetOptions" ToRole="Placement" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderID" Type="Int32" />
+          <Property Name="WorkerID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Reward" Type="Int32" />
+          <Property Name="ExpPoints" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.Job_User_UID_fk" FromRole="Job" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.Job_worker_fk" FromRole="Job" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Placement">
+          <Key>
+            <PropertyRef Name="PlacementID" />
+            <PropertyRef Name="BetID_fk" />
+            <PropertyRef Name="UID_fk" />
+          </Key>
+          <Property Name="PlacementID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BetID_fk" Type="Int32" Nullable="false" />
+          <Property Name="UID_fk" Type="Int32" Nullable="false" />
+          <Property Name="OptionID_fk" Type="Int32" />
+          <NavigationProperty Name="Bet" Relationship="Self.Bet_fk" FromRole="Placement" ToRole="Bet" />
+          <NavigationProperty Name="BetOptions" Relationship="Self.Placement_BetOptions_OptionsID_fk" FromRole="Placement" ToRole="BetOptions" />
+          <NavigationProperty Name="User" Relationship="Self.User_fk" FromRole="Placement" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PLZ">
+          <Key>
+            <PropertyRef Name="PLZ1" />
+          </Key>
+          <Property Name="PLZ1" Type="Int32" Nullable="false" />
+          <Property Name="Ort" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.PLZ_fk" FromRole="PLZ" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UID" />
+          </Key>
+          <Property Name="UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vorname" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="E_Mail" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="25" FixedLength="true" Unicode="false" />
+          <Property Name="PLZ_fk" Type="Int32" />
+          <Property Name="ExpPoints" Type="Int32" />
+          <Property Name="PasswordHash" Type="String" MaxLength="500" FixedLength="true" Unicode="false" />
+          <Property Name="walletbalance" Type="Int32" />
+          <Property Name="profilepicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Bet" Relationship="Self.UID_fk2" FromRole="User" ToRole="Bet" />
+          <NavigationProperty Name="Job" Relationship="Self.Job_User_UID_fk" FromRole="User" ToRole="Job" />
+          <NavigationProperty Name="Job1" Relationship="Self.Job_worker_fk" FromRole="User" ToRole="Job" />
+          <NavigationProperty Name="Placement" Relationship="Self.User_fk" FromRole="User" ToRole="Placement" />
+          <NavigationProperty Name="PLZ" Relationship="Self.PLZ_fk" FromRole="User" ToRole="PLZ" />
+          <NavigationProperty Name="Achievement" Relationship="Self.AchievedAchievement" FromRole="User" ToRole="Achievement" />
+        </EntityType>
+        <Association Name="Bet_fk">
+          <End Role="Bet" Type="Self.Bet" Multiplicity="1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="BetID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="BetID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BetOptions_Bet_BetID_fk">
+          <End Role="Bet" Type="Self.Bet" Multiplicity="0..1" />
+          <End Role="BetOptions" Type="Self.BetOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bet">
+              <PropertyRef Name="BetID" />
+            </Principal>
+            <Dependent Role="BetOptions">
+              <PropertyRef Name="BetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UID_fk2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Bet" Type="Self.Bet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Bet">
+              <PropertyRef Name="UID_fk2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Placement_BetOptions_OptionsID_fk">
+          <End Role="BetOptions" Type="Self.BetOptions" Multiplicity="0..1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BetOptions">
+              <PropertyRef Name="OptionsID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="OptionID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_User_UID_fk">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="ProviderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Job_worker_fk">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="WorkerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_fk">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Placement" Type="Self.Placement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UID" />
+            </Principal>
+            <Dependent Role="Placement">
+              <PropertyRef Name="UID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PLZ_fk">
+          <End Role="PLZ" Type="Self.PLZ" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLZ">
+              <PropertyRef Name="PLZ1" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PLZ_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AchievedAchievement">
+          <End Role="Achievement" Type="Self.Achievement" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dhbwinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Achievement" EntityType="Self.Achievement" />
+          <EntitySet Name="Bet" EntityType="Self.Bet" />
+          <EntitySet Name="BetOptions" EntityType="Self.BetOptions" />
+          <EntitySet Name="Job" EntityType="Self.Job" />
+          <EntitySet Name="Placement" EntityType="Self.Placement" />
+          <EntitySet Name="PLZ" EntityType="Self.PLZ" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="Bet_fk" Association="Self.Bet_fk">
+            <End Role="Bet" EntitySet="Bet" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+          <AssociationSet Name="BetOptions_Bet_BetID_fk" Association="Self.BetOptions_Bet_BetID_fk">
+            <End Role="Bet" EntitySet="Bet" />
+            <End Role="BetOptions" EntitySet="BetOptions" />
+          </AssociationSet>
+          <AssociationSet Name="UID_fk2" Association="Self.UID_fk2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Bet" EntitySet="Bet" />
+          </AssociationSet>
+          <AssociationSet Name="Placement_BetOptions_OptionsID_fk" Association="Self.Placement_BetOptions_OptionsID_fk">
+            <End Role="BetOptions" EntitySet="BetOptions" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+          <AssociationSet Name="Job_User_UID_fk" Association="Self.Job_User_UID_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="Job_worker_fk" Association="Self.Job_worker_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="User_fk" Association="Self.User_fk">
+            <End Role="User" EntitySet="User" />
+            <End Role="Placement" EntitySet="Placement" />
+          </AssociationSet>
+          <AssociationSet Name="PLZ_fk" Association="Self.PLZ_fk">
+            <End Role="PLZ" EntitySet="PLZ" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="AchievedAchievement" Association="Self.AchievedAchievement">
+            <End Role="Achievement" EntitySet="Achievement" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dhbwinModelStoreContainer" CdmEntityContainer="dhbwinEntities">
+          <EntitySetMapping Name="Achievement">
+            <EntityTypeMapping TypeName="dhbwinModel.Achievement">
+              <MappingFragment StoreEntitySet="Achievement">
+                <ScalarProperty Name="AchID" ColumnName="AchID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExpPoints" ColumnName="ExpPoints" />
+                <ScalarProperty Name="Reward" ColumnName="Reward" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bet">
+            <EntityTypeMapping TypeName="dhbwinModel.Bet">
+              <MappingFragment StoreEntitySet="Bet">
+                <ScalarProperty Name="BetID" ColumnName="BetID" />
+                <ScalarProperty Name="UID_fk2" ColumnName="UID_fk2" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ExpPoints" ColumnName="ExpPoints" />
+                <ScalarProperty Name="Reward" ColumnName="Reward" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BetOptions">
+            <EntityTypeMapping TypeName="dhbwinModel.BetOptions">
+              <MappingFragment StoreEntitySet="BetOptions">
+                <ScalarProperty Name="OptionsID" ColumnName="OptionsID" />
+                <ScalarProperty Name="BetID" ColumnName="BetID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Descpription" ColumnName="Descpription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Job">
+            <EntityTypeMapping TypeName="dhbwinModel.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+                <ScalarProperty Name="WorkerID" ColumnName="WorkerID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Reward" ColumnName="Reward" />
+                <ScalarProperty Name="ExpPoints" ColumnName="ExpPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Placement">
+            <EntityTypeMapping TypeName="dhbwinModel.Placement">
+              <MappingFragment StoreEntitySet="Placement">
+                <ScalarProperty Name="PlacementID" ColumnName="PlacementID" />
+                <ScalarProperty Name="BetID_fk" ColumnName="BetID_fk" />
+                <ScalarProperty Name="UID_fk" ColumnName="UID_fk" />
+                <ScalarProperty Name="OptionID_fk" ColumnName="OptionID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLZ">
+            <EntityTypeMapping TypeName="dhbwinModel.PLZ">
+              <MappingFragment StoreEntitySet="PLZ">
+                <ScalarProperty Name="PLZ1" ColumnName="PLZ" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="dhbwinModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="E_Mail" ColumnName="E-Mail" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="PLZ_fk" ColumnName="PLZ_fk" />
+                <ScalarProperty Name="ExpPoints" ColumnName="ExpPoints" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="walletbalance" ColumnName="walletbalance" />
+                <ScalarProperty Name="profilepicture" ColumnName="profilepicture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AchievedAchievement" TypeName="dhbwinModel.AchievedAchievement" StoreEntitySet="AchievedAchievement">
+            <EndProperty Name="Achievement">
+              <ScalarProperty Name="AchID" ColumnName="AchID_fk" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="UID" ColumnName="UID_fk" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

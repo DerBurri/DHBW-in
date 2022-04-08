@@ -1,0 +1,96 @@
+﻿@model DHBWin_Neu.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vorname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vorname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.E_Mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.E_Mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpPoints)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PasswordHash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.walletbalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.walletbalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.profilepicture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.profilepicture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PLZ.Ort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PLZ.Ort)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
