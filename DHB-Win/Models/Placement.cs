@@ -1,10 +1,4 @@
-﻿
-
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
-namespace DHB_Win.Models
+﻿namespace DHB_Win.Models
 {
     public partial class Placement
     {
@@ -13,8 +7,8 @@ namespace DHB_Win.Models
         public int UidFk { get; set; }
         public int? OptionIdFk { get; set; }
 
-        public virtual Bet BetIdFkNavigation { get; set; }
-        public virtual BetOptions OptionIdFkNavigation { get; set; }
-        public virtual User UidFkNavigation { get; set; }
+        public virtual Bet BetIdFkNavigation { get; set; } = null!;
+        public virtual BetOption? OptionIdFkNavigation { get; set; }
+        public virtual User UidFkNavigation { get; set; } = null!;
     }
 }

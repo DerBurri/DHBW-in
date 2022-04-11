@@ -1,36 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
 namespace DHB_Win.Models
 {
-    public partial class dhbwinContext : DbContext
+    public partial class DHBWinDbContext : DbContext
     {
-        public dhbwinContext()
+        public DHBWinDbContext()
         {
         }
 
-        public dhbwinContext(DbContextOptions<dhbwinContext> options)
+        public DHBWinDbContext(DbContextOptions<DHBWinDbContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<AchievedAchievement> AchievedAchievement { get; set; }
-        public virtual DbSet<Achievement> Achievement { get; set; }
-        public virtual DbSet<Bet> Bet { get; set; }
-        public virtual DbSet<BetOptions> BetOptions { get; set; }
-        public virtual DbSet<Job> Job { get; set; }
-        public virtual DbSet<Placement> Placement { get; set; }
-        public virtual DbSet<Plz> Plz { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<AchievedAchievement> AchievedAchievements { get; set; } = null!;
+        public virtual DbSet<Achievement> Achievements { get; set; } = null!;
+        public virtual DbSet<Bet> Bets { get; set; } = null!;
+        public virtual DbSet<BetOption> BetOptions { get; set; } = null!;
+        public virtual DbSet<Job> Jobs { get; set; } = null!;
+        public virtual DbSet<Placement> Placements { get; set; } = null!;
+        public virtual DbSet<Plz> Plzs { get; set; } = null!;
+        public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http: //go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer(
                     "Server=tcp:database-dhbwin.database.windows.net,1433;Initial Catalog=dhbwin;Persist Security Info=False;User ID=dbadmin;Password=admin123!;");
             }
@@ -46,13 +42,12 @@ namespace DHB_Win.Models
 
                 entity.ToTable("AchievedAchievement", "dhbwin");
 
-                entity.HasIndex(e => e.AchIdFk)
-                    .HasName("AchievedAchievement_AchID_fk_uindex")
+                entity.HasIndex(e => e.AchIdFk, "AchievedAchievement_AchID_fk_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.AchIdFk)
-                    .HasColumnName("AchID_fk")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("AchID_fk");
 
                 entity.Property(e => e.UidFk).HasColumnName("UID_fk");
 
@@ -63,7 +58,7 @@ namespace DHB_Win.Models
                     .HasConstraintName("AchievedAchievement_Achievement_AchID_fk");
 
                 entity.HasOne(d => d.UidFkNavigation)
-                    .WithMany(p => p.AchievedAchievement)
+                    .WithMany(p => p.AchievedAchievements)
                     .HasForeignKey(d => d.UidFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("User_AchievedAchievement___fk");
@@ -77,8 +72,7 @@ namespace DHB_Win.Models
 
                 entity.ToTable("Achievement", "dhbwin");
 
-                entity.HasIndex(e => e.AchId)
-                    .HasName("Achievement_AchID_uindex")
+                entity.HasIndex(e => e.AchId, "Achievement_AchID_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.AchId).HasColumnName("AchID");
@@ -102,8 +96,7 @@ namespace DHB_Win.Models
 
                 entity.ToTable("Bet", "dhbwin");
 
-                entity.HasIndex(e => e.BetId)
-                    .HasName("Bet_BetID_uindex")
+                entity.HasIndex(e => e.BetId, "Bet_BetID_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.BetId).HasColumnName("BetID");
@@ -121,13 +114,13 @@ namespace DHB_Win.Models
                 entity.Property(e => e.UidFk2).HasColumnName("UID_fk2");
 
                 entity.HasOne(d => d.UidFk2Navigation)
-                    .WithMany(p => p.Bet)
+                    .WithMany(p => p.Bets)
                     .HasForeignKey(d => d.UidFk2)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("UID_fk2");
             });
 
-            modelBuilder.Entity<BetOptions>(entity =>
+            modelBuilder.Entity<BetOption>(entity =>
             {
                 entity.HasKey(e => e.OptionsId)
                     .HasName("BetOptions_pk")
@@ -135,8 +128,7 @@ namespace DHB_Win.Models
 
                 entity.ToTable("BetOptions", "dhbwin");
 
-                entity.HasIndex(e => e.OptionsId)
-                    .HasName("BetOptions_OptionsID_uindex")
+                entity.HasIndex(e => e.OptionsId, "BetOptions_OptionsID_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.OptionsId).HasColumnName("OptionsID");
@@ -169,8 +161,7 @@ namespace DHB_Win.Models
 
                 entity.HasComment("Create jobs with Betcoins");
 
-                entity.HasIndex(e => e.JobId)
-                    .HasName("Job_JobID_uindex")
+                entity.HasIndex(e => e.JobId, "Job_JobID_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.JobId).HasColumnName("JobID");
@@ -190,12 +181,12 @@ namespace DHB_Win.Models
                 entity.Property(e => e.WorkerId).HasColumnName("WorkerID");
 
                 entity.HasOne(d => d.Provider)
-                    .WithMany(p => p.JobProvider)
+                    .WithMany(p => p.JobProviders)
                     .HasForeignKey(d => d.ProviderId)
                     .HasConstraintName("Job_User_UID_fk");
 
                 entity.HasOne(d => d.Worker)
-                    .WithMany(p => p.JobWorker)
+                    .WithMany(p => p.JobWorkers)
                     .HasForeignKey(d => d.WorkerId)
                     .HasConstraintName("Job_worker_fk");
             });
@@ -208,23 +199,20 @@ namespace DHB_Win.Models
 
                 entity.ToTable("Placement", "dhbwin");
 
-                entity.HasIndex(e => e.BetIdFk)
-                    .HasName("Placement_BetID_fk_uindex")
+                entity.HasIndex(e => e.BetIdFk, "Placement_BetID_fk_uindex")
                     .IsUnique();
 
-                entity.HasIndex(e => e.PlacementId)
-                    .HasName("Placement_PlacementID_uindex")
+                entity.HasIndex(e => e.PlacementId, "Placement_PlacementID_uindex")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UidFk)
-                    .HasName("Placement_UID_fk_uindex")
+                entity.HasIndex(e => e.UidFk, "Placement_UID_fk_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.UidFk).HasColumnName("UID_fk");
 
                 entity.Property(e => e.PlacementId)
-                    .HasColumnName("PlacementID")
-                    .ValueGeneratedOnAdd();
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("PlacementID");
 
                 entity.Property(e => e.BetIdFk).HasColumnName("BetID_fk");
 
@@ -237,7 +225,7 @@ namespace DHB_Win.Models
                     .HasConstraintName("Bet_fk");
 
                 entity.HasOne(d => d.OptionIdFkNavigation)
-                    .WithMany(p => p.Placement)
+                    .WithMany(p => p.Placements)
                     .HasForeignKey(d => d.OptionIdFk)
                     .HasConstraintName("Placement_BetOptions_OptionsID_fk");
 
@@ -256,13 +244,12 @@ namespace DHB_Win.Models
 
                 entity.ToTable("PLZ", "dhbwin");
 
-                entity.HasIndex(e => e.Plz1)
-                    .HasName("PLZ_PLZ_uindex")
+                entity.HasIndex(e => e.Plz1, "PLZ_PLZ_uindex")
                     .IsUnique();
 
                 entity.Property(e => e.Plz1)
-                    .HasColumnName("PLZ")
-                    .ValueGeneratedNever();
+                    .ValueGeneratedNever()
+                    .HasColumnName("PLZ");
 
                 entity.Property(e => e.Ort)
                     .HasMaxLength(30)
@@ -281,9 +268,9 @@ namespace DHB_Win.Models
                 entity.Property(e => e.Uid).HasColumnName("UID");
 
                 entity.Property(e => e.EMail)
-                    .HasColumnName("E-Mail")
                     .HasMaxLength(50)
                     .IsUnicode(false)
+                    .HasColumnName("E-Mail")
                     .IsFixedLength();
 
                 entity.Property(e => e.Firstname)
@@ -311,7 +298,7 @@ namespace DHB_Win.Models
                     .IsFixedLength();
 
                 entity.HasOne(d => d.PlzFkNavigation)
-                    .WithMany(p => p.User)
+                    .WithMany(p => p.Users)
                     .HasForeignKey(d => d.PlzFk)
                     .HasConstraintName("PLZ_fk");
             });

@@ -8,17 +8,17 @@ namespace DHB_Win.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly dhbwinContext _context;
+        //private readonly dhbwinContext _context;
 
-        public HomeController(ILogger<HomeController> logger, dhbwinContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = context;
+            // _context = context;
         }
 
         public IActionResult Index()
         {
-            string? test = _context.Achievement.Find("test").Title;
+            //string? test = _context.Achievement.Find("test").Title;
             return View();
         }
 
