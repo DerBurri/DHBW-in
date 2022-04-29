@@ -5,10 +5,12 @@ using Microsoft.Extensions.Logging;
 
 namespace DHB_Win.Controllers
 {
+    [Route("home")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         //private readonly dhbwinContext _context;
+
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -16,6 +18,9 @@ namespace DHB_Win.Controllers
             // _context = context;
         }
 
+        [Route("")]
+        [Route("index")]
+        [Route("~/")]
         public IActionResult Index()
         {
             //string? test = _context.Achievement.Find("test").Title;
