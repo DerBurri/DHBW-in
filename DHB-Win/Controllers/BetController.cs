@@ -17,7 +17,8 @@ namespace DHB_Win.Controllers
         }
 
         // GET: Bet
-        public async Task<IActionResult> Index()
+       
+       public async Task<IActionResult> Index()
         {
             var dHBWinDbContext = _context.Bets.Include(b => b.UidFk2Navigation);
             return View(await dHBWinDbContext.ToListAsync());
