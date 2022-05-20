@@ -2,7 +2,6 @@
 using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Controller = DHB_Win.Models.Controller;
 
 namespace DHB_Win.Controllers
 {
@@ -10,7 +9,7 @@ namespace DHB_Win.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly DHBWinDbContext _context;
+        //private readonly dhbwinContext _context;
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -28,8 +27,7 @@ namespace DHB_Win.Controllers
             return View();
         }
 
-        [Route("calendar")]
-        public IActionResult Calendar()
+        public IActionResult Privacy()
         {
             return View();
         }
@@ -38,13 +36,6 @@ namespace DHB_Win.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-        }
-
-        [Route("auftraege")]
-        public IActionResult Auftraege()
-        {
-            throw new System.NotImplementedException();
-            return View();
         }
     }
 }
