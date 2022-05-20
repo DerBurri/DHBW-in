@@ -1,0 +1,55 @@
+@model DHB_Win.Models.Job
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Job</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reward)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reward)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExpPoints)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Provider)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Provider.Uid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Worker)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Worker.Uid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.JobId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,50 @@
+@model DHB_Win.Models.BetOption
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>BetOption</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OptionsId"/>
+            <div class="form-group">
+                <label asp-for="BetId" class="control-label"></label>
+                <select asp-for="BetId" class="form-control" asp-items="ViewBag.BetId"></select>
+                <span asp-validation-for="BetId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control"/>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descpription" class="control-label"></label>
+                <input asp-for="Descpription" class="form-control"/>
+                <span asp-validation-for="Descpription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuoteValue" class="control-label"></label>
+                <input asp-for="QuoteValue" class="form-control"/>
+                <span asp-validation-for="QuoteValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

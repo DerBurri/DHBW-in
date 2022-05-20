@@ -2,97 +2,95 @@ using System.Linq;
 using System.Threading.Tasks;
 using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DHB_Win.Controllers
 {
-    public class DHBWController : Controller
+    public class AchievementController : Controller
     {
         private readonly DHBWinDbContext _context;
 
-        public DHBWController(DHBWinDbContext context)
+        public AchievementController(DHBWinDbContext context)
         {
             _context = context;
         }
 
-        // GET: DHBW
+        // GET: Achievement
         public async Task<IActionResult> Index()
         {
-            var dHBWinDbContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dHBWinDbContext.ToListAsync());
+            return _context.Achievements != null
+                ? View(await _context.Achievements.ToListAsync())
+                : Problem("Entity set 'DHBWinDbContext.Achievements'  is null.");
         }
 
-        // GET: DHBW/Details/5
+        // GET: Achievement/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Bets == null)
+            if (id == null || _context.Achievements == null)
             {
                 return NotFound();
             }
 
-            var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
-                .FirstOrDefaultAsync(m => m.BetId == id);
-            if (bet == null)
+            var achievement = await _context.Achievements
+                .FirstOrDefaultAsync(m => m.AchId == id);
+            if (achievement == null)
             {
                 return NotFound();
             }
 
-            return View(bet);
+            return View(achievement);
         }
 
-        // GET: DHBW/Create
+        // GET: Achievement/Create
         public IActionResult Create()
         {
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid");
             return View();
         }
 
-        // POST: DHBW/Create
+        // POST: Achievement/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description")] Bet bet)
+        public async Task<IActionResult> Create(
+            [Bind("AchId,Title,Description,ExpPoints,Reward")] Achievement achievement)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bet);
+                _context.Add(achievement);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
-            return View(bet);
+            return View(achievement);
         }
 
-        // GET: DHBW/Edit/5
+        // GET: Achievement/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Bets == null)
+            if (id == null || _context.Achievements == null)
             {
                 return NotFound();
             }
 
-            var bet = await _context.Bets.FindAsync(id);
-            if (bet == null)
+            var achievement = await _context.Achievements.FindAsync(id);
+            if (achievement == null)
             {
                 return NotFound();
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
-            return View(bet);
+            return View(achievement);
         }
 
-        // POST: DHBW/Edit/5
+        // POST: Achievement/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description")] Bet bet)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("AchId,Title,Description,ExpPoints,Reward")] Achievement achievement)
         {
-            if (id != bet.BetId)
+            if (id != achievement.AchId)
             {
                 return NotFound();
             }
@@ -101,12 +99,12 @@ namespace DHB_Win.Controllers
             {
                 try
                 {
-                    _context.Update(bet);
+                    _context.Update(achievement);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BetExists(bet.BetId))
+                    if (!AchievementExists(achievement.AchId))
                     {
                         return NotFound();
                     }
@@ -119,52 +117,50 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
-            return View(bet);
+            return View(achievement);
         }
 
-        // GET: DHBW/Delete/5
+        // GET: Achievement/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Bets == null)
+            if (id == null || _context.Achievements == null)
             {
                 return NotFound();
             }
 
-            var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
-                .FirstOrDefaultAsync(m => m.BetId == id);
-            if (bet == null)
+            var achievement = await _context.Achievements
+                .FirstOrDefaultAsync(m => m.AchId == id);
+            if (achievement == null)
             {
                 return NotFound();
             }
 
-            return View(bet);
+            return View(achievement);
         }
 
-        // POST: DHBW/Delete/5
+        // POST: Achievement/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Bets == null)
+            if (_context.Achievements == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Bets'  is null.");
+                return Problem("Entity set 'DHBWinDbContext.Achievements'  is null.");
             }
 
-            var bet = await _context.Bets.FindAsync(id);
-            if (bet != null)
+            var achievement = await _context.Achievements.FindAsync(id);
+            if (achievement != null)
             {
-                _context.Bets.Remove(bet);
+                _context.Achievements.Remove(achievement);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BetExists(int id)
+        private bool AchievementExists(int id)
         {
-            return (_context.Bets?.Any(e => e.BetId == id)).GetValueOrDefault();
+            return (_context.Achievements?.Any(e => e.AchId == id)).GetValueOrDefault();
         }
     }
 }

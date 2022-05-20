@@ -1,0 +1,85 @@
+@model IEnumerable<DHB_Win.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Walletbalance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profilepicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlzFkNavigation)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PasswordHash)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Walletbalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profilepicture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlzFkNavigation.Plz1)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Uid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Uid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Uid">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
