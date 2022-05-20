@@ -1,0 +1,48 @@
+@model DHB_Win.Models.Bet
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Bet</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ExpPoints)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Reward)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Reward)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UidFk2Navigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UidFk2Navigation.Uid)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.BetId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
