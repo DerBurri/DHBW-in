@@ -27,6 +27,14 @@ namespace DHB_Win.Controllers
             return View();
         }
 
+      
+        [Route("Wetten")]
+        public IActionResult Wetten()
+        {
+            //string? test = _context.Achievement.Find("test").Title;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
