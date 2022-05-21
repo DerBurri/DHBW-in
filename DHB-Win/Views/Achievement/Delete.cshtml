@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Löschen</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Sind sie sicher, dass sie dieses Element löschen wollen</h3>
 <div>
     <h4>Achievement</h4>
     <hr/>
@@ -40,7 +40,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="AchId"/>
-        <input type="submit" value="Delete" class="btn btn-danger"/> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Löschen" class="btn btn-danger"/> |
+        <a asp-action="Index">Zurück zu Achievements</a>
     </form>
 </div>

@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Benutzerprofil</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+     @Html.ActionLink("Daten bearbeiten", "Edit", "User", new {})
+  <a asp-action="Edit">Daten bearbeiten</a> <!-- beide Varianten werden net gefunden ....?!-->
 </p>
 <table class="table">
     <thead>
@@ -45,7 +46,7 @@
     </thead>
     <tbody>
     @foreach (var item in Model)
-    {
+    { 
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Firstname)
@@ -75,9 +76,6 @@
                 @Html.DisplayFor(modelItem => item.PlzFkNavigation.Plz1)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Uid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Uid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Uid">Delete</a>
             </td>
         </tr>
     }

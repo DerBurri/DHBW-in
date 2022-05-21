@@ -5,11 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Achievements</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
     <tr>
@@ -45,9 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Reward)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AchId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AchId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AchId">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.AchId">Details</a>        
             </td>
         </tr>
     }

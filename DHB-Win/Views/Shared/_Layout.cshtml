@@ -192,7 +192,7 @@
                 <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                @Html.ActionLink("USERNAME", "Index", "Bet", new {})
+                @Html.ActionLink("USERNAME", "Index", "User", new {})
                 <!-- Link zu https://localhost:44389/Home/Wetten?area=area-->
 
             </div>
@@ -213,13 +213,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class=nav-item>
 
-                    <a class="nav-link">
+                    <a class="nav-link" asp-action="Index" asp-controller="Job">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>Aufträge</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a  class="nav-link" asp-action="Index" asp-controller="Bet">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Wetten
@@ -227,7 +227,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a asp-action="Index" asp-controller="Achievement" class="nav-link">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Achievements
@@ -235,21 +235,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a asp-action="Index" asp-controller="History" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
                             Historie
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-plus-square"></i>
-                        <p>
-                            Erstellen
-                        </p>
-                    </a>
-                </li>
+                
             </ul>
         </nav>
 
