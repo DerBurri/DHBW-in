@@ -33,6 +33,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Include="Views\**\*"/>
+    </ItemGroup>
+    
+    <ItemGroup>
         <_ContentIncludedByDefault Remove="Views\test\Create.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\test\Delete.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\test\Details.cshtml"/>

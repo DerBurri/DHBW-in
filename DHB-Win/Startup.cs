@@ -1,9 +1,9 @@
+using DHB_Win.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 
 namespace DHB_Win
 {
@@ -21,7 +21,7 @@ namespace DHB_Win
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-           
+            services.AddDbContext<DHBWinDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
