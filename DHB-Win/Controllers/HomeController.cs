@@ -21,7 +21,12 @@ namespace DHB_Win.Controllers
         [Route("")]
         [Route("index")]
         [Route("~/")]
-        public IActionResult Index()
+         public IActionResult Index()
+        {
+        return View();
+        }
+        [Route("Contact")]
+        public IActionResult Contact()
         {
             //string? test = _context.Achievement.Find("test").Title;
             return View();
@@ -29,10 +34,10 @@ namespace DHB_Win.Controllers
 
 
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-       // public IActionResult Error()
-       // {
-       //    return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-       // }
-       //brauchen wir sowas? 
+        // public IActionResult Error()
+        // {
+        //    return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+        // }
+        //brauchen wir sowas? 
     }
 }
