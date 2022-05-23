@@ -21,7 +21,7 @@ namespace DHB_Win.Models
         public int? ExpPoints { get; set; }
         public string? PasswordHash { get; set; }
         public int? Walletbalance { get; set; }
-        public byte[]? Profilepicture { get; set; }
+        public int? Profilepicture { get; set; }
 
         public virtual Plz? PlzFkNavigation { get; set; }
         public virtual Placement Placement { get; set; } = null!;
