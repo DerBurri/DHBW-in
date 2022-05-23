@@ -13,7 +13,7 @@ namespace DHB_Win.Models
         }
 
 
-        
+        [Display(Name = "Bet ID")]
         public int BetId { get; set; }
 
         [Display(Name = "User")]
