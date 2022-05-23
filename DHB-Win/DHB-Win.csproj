@@ -2083,16 +2083,16 @@
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo3.jpg" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo4.jpg" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-1.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user2-160x160.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user3-128x128.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user4-128x128.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user5-128x128.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user6-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user2-160x160.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user3-128x128.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user4-128x128.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user5-128x128.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user6-128x128.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user7-128x128.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user8-128x128.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\.eslintrc.json"/>
@@ -2128,6 +2128,14 @@
         <_ContentIncludedByDefault Remove="Views\DHBW\Details.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\DHBW\Edit.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\DHBW\Index.cshtml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <UpToDateCheckInput Remove="Views\Job\Create.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Delete.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Details.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Edit.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Index.cshtml"/>
     </ItemGroup>
 
 

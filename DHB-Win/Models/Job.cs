@@ -15,6 +15,8 @@ namespace DHB_Win.Models
         public string? Description { get; set; }
         public int? Reward { get; set; }
         public int? ExpPoints { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? FinishDate { get; set; }
 
         public virtual User? Provider { get; set; }
         public virtual User? Worker { get; set; }

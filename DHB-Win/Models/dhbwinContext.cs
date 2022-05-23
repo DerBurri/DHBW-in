@@ -175,10 +175,14 @@ namespace DHB_Win.Models
 
                 entity.Property(e => e.JobId).HasColumnName("JobID");
 
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .IsFixedLength();
+
+                entity.Property(e => e.FinishDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
 

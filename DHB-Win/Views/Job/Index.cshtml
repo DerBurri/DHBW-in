@@ -26,6 +26,12 @@
             @Html.DisplayNameFor(model => model.ExpPoints)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Provider)
         </th>
         <th>
@@ -49,6 +55,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExpPoints)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Provider.Uid)
