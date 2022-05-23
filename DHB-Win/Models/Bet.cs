@@ -17,6 +17,7 @@ namespace DHB_Win.Models
         public int? ExpPoints { get; set; }
         public int? Reward { get; set; }
         public string? Description { get; set; }
+        public DateTime? CreationDate { get; set; }
 
         public virtual User? UidFk2Navigation { get; set; }
         public virtual ICollection<BetOption> BetOptions { get; set; }

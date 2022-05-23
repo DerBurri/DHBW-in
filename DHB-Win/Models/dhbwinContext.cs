@@ -104,6 +104,8 @@ namespace DHB_Win.Models
 
                 entity.Property(e => e.BetId).HasColumnName("BetID");
 
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
                     .IsUnicode(false)
