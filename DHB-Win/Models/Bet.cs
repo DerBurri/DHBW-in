@@ -39,6 +39,7 @@ namespace DHB_Win.Models
         [Display(Name = "Beschreibung")]
         [Required(ErrorMessage = "Beschreibung ist notwendig")]
         public string? Description { get; set; }
+        public DateTime? CreationDate { get; set; }
 
         [Display(Name = "User")]
         public virtual User? UidFk2Navigation { get; set; }
