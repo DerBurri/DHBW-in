@@ -1,17 +1,19 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class JobController : Controller
     {
-        private readonly DHBWinDbContext _context;
+        private readonly dhbwinContext _context;
 
-        public JobController(DHBWinDbContext context)
+        public JobController(dhbwinContext context)
         {
             _context = context;
         }
@@ -19,8 +21,8 @@ namespace DHB_Win.Controllers
         // GET: Job
         public async Task<IActionResult> Index()
         {
-            var dHBWinDbContext = _context.Jobs.Include(j => j.Provider).Include(j => j.Worker);
-            return View(await dHBWinDbContext.ToListAsync());
+            var dhbwinContext = _context.Jobs.Include(j => j.Provider).Include(j => j.Worker);
+            return View(await dhbwinContext.ToListAsync());
         }
 
         // GET: Job/Details/5
@@ -157,7 +159,7 @@ namespace DHB_Win.Controllers
         {
             if (_context.Jobs == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Jobs'  is null.");
+                return Problem("Entity set 'dhbwinContext.Jobs'  is null.");
             }
 
             var job = await _context.Jobs.FindAsync(id);

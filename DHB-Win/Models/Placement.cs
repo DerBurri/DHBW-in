@@ -1,4 +1,7 @@
-﻿namespace DHB_Win.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace DHB_Win.Models
 {
     public partial class Placement
     {

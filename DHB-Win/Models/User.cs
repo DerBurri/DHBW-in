@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DHB_Win.Models
 {
@@ -10,6 +11,7 @@ namespace DHB_Win.Models
             Bets = new HashSet<Bet>();
             JobProviders = new HashSet<Job>();
             JobWorkers = new HashSet<Job>();
+            Placements = new HashSet<Placement>();
         }
 
         public int Uid { get; set; }
@@ -24,10 +26,10 @@ namespace DHB_Win.Models
         public int? Profilepicture { get; set; }
 
         public virtual Plz? PlzFkNavigation { get; set; }
-        public virtual Placement Placement { get; set; } = null!;
         public virtual ICollection<AchievedAchievement> AchievedAchievements { get; set; }
         public virtual ICollection<Bet> Bets { get; set; }
         public virtual ICollection<Job> JobProviders { get; set; }
         public virtual ICollection<Job> JobWorkers { get; set; }
+        public virtual ICollection<Placement> Placements { get; set; }
     }
 }

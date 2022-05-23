@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -21,15 +20,16 @@ namespace DHB_Win.Controllers
         [Route("")]
         [Route("index")]
         [Route("~/")]
-         public IActionResult Index()
+        public IActionResult Index()
         {
-        return View();
+            return View();
         }
+
         [Route("Contact")]
         public IActionResult Contact()
         {
             //string? test = _context.Achievement.Find("test").Title;
-            return View(); 
+            return View();
         }
 
 

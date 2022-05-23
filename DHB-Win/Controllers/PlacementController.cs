@@ -1,17 +1,19 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class PlacementController : Controller
     {
-        private readonly DHBWinDbContext _context;
+        private readonly dhbwinContext _context;
 
-        public PlacementController(DHBWinDbContext context)
+        public PlacementController(dhbwinContext context)
         {
             _context = context;
         }
@@ -19,9 +21,9 @@ namespace DHB_Win.Controllers
         // GET: Placement
         public async Task<IActionResult> Index()
         {
-            var dHBWinDbContext = _context.Placements.Include(p => p.BetIdFkNavigation)
+            var dhbwinContext = _context.Placements.Include(p => p.BetIdFkNavigation)
                 .Include(p => p.OptionIdFkNavigation).Include(p => p.UidFkNavigation);
-            return View(await dHBWinDbContext.ToListAsync());
+            return View(await dhbwinContext.ToListAsync());
         }
 
         // GET: Placement/Details/5
@@ -166,7 +168,7 @@ namespace DHB_Win.Controllers
         {
             if (_context.Placements == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Placements'  is null.");
+                return Problem("Entity set 'dhbwinContext.Placements'  is null.");
             }
 
             var placement = await _context.Placements.FindAsync(id);

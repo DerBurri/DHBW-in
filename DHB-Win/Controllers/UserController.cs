@@ -1,17 +1,19 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class UserController : Controller
     {
-        private readonly DHBWinDbContext _context;
+        private readonly dhbwinContext _context;
 
-        public UserController(DHBWinDbContext context)
+        public UserController(dhbwinContext context)
         {
             _context = context;
         }
@@ -19,8 +21,8 @@ namespace DHB_Win.Controllers
         // GET: User
         public async Task<IActionResult> Index()
         {
-            var dHBWinDbContext = _context.Users.Include(u => u.PlzFkNavigation);
-            return View(await dHBWinDbContext.ToListAsync());
+            var dhbwinContext = _context.Users.Include(u => u.PlzFkNavigation);
+            return View(await dhbwinContext.ToListAsync());
         }
 
         // GET: User/Details/5
@@ -70,7 +72,6 @@ namespace DHB_Win.Controllers
         }
 
         // GET: User/Edit/5
-        [Route("Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
@@ -154,7 +155,7 @@ namespace DHB_Win.Controllers
         {
             if (_context.Users == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Users'  is null.");
+                return Problem("Entity set 'dhbwinContext.Users'  is null.");
             }
 
             var user = await _context.Users.FindAsync(id);

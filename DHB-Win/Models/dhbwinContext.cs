@@ -1,14 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DHB_Win.Models
 {
-    public partial class DHBWinDbContext : DbContext
+    public partial class dhbwinContext : DbContext
     {
-        public DHBWinDbContext()
+        public dhbwinContext()
         {
         }
 
-        public DHBWinDbContext(DbContextOptions<DHBWinDbContext> options)
+        public dhbwinContext(DbContextOptions<dhbwinContext> options)
             : base(options)
         {
         }
@@ -116,7 +119,6 @@ namespace DHB_Win.Models
                 entity.HasOne(d => d.UidFk2Navigation)
                     .WithMany(p => p.Bets)
                     .HasForeignKey(d => d.UidFk2)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("UID_fk2");
             });
 
@@ -205,9 +207,6 @@ namespace DHB_Win.Models
                 entity.HasIndex(e => e.PlacementId, "Placement_PlacementID_uindex")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UidFk, "Placement_UID_fk_uindex")
-                    .IsUnique();
-
                 entity.Property(e => e.UidFk).HasColumnName("UID_fk");
 
                 entity.Property(e => e.PlacementId)
@@ -230,8 +229,8 @@ namespace DHB_Win.Models
                     .HasConstraintName("Placement_BetOptions_OptionsID_fk");
 
                 entity.HasOne(d => d.UidFkNavigation)
-                    .WithOne(p => p.Placement)
-                    .HasForeignKey<Placement>(d => d.UidFk)
+                    .WithMany(p => p.Placements)
+                    .HasForeignKey(d => d.UidFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("User_fk");
             });
@@ -289,8 +288,6 @@ namespace DHB_Win.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.PlzFk).HasColumnName("PLZ_fk");
-
-                entity.Property(e => e.Profilepicture).HasColumnType("image");
 
                 entity.Property(e => e.Street)
                     .HasMaxLength(25)

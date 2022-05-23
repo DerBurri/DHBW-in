@@ -1,27 +1,28 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class BetController : Controller
     {
-        private readonly DHBWinDbContext _context;
+        private readonly dhbwinContext _context;
 
-        public BetController(DHBWinDbContext context)
+        public BetController(dhbwinContext context)
         {
             _context = context;
         }
 
         // GET: Bet
-       
-       public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-            var dHBWinDbContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dHBWinDbContext.ToListAsync());
+            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
+            return View(await dhbwinContext.ToListAsync());
         }
 
         // GET: Bet/Details/5
@@ -150,7 +151,7 @@ namespace DHB_Win.Controllers
         {
             if (_context.Bets == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Bets'  is null.");
+                return Problem("Entity set 'dhbwinContext.Bets'  is null.");
             }
 
             var bet = await _context.Bets.FindAsync(id);

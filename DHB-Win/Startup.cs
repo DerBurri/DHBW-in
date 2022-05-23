@@ -21,7 +21,7 @@ namespace DHB_Win
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<DHBWinDbContext>();
+            services.AddDbContext<dhbwinContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
