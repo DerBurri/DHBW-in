@@ -1,16 +1,19 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class AchievementController : Controller
     {
-        private readonly DHBWinDbContext _context;
+        private readonly dhbwinContext _context;
 
-        public AchievementController(DHBWinDbContext context)
+        public AchievementController(dhbwinContext context)
         {
             _context = context;
         }
@@ -20,7 +23,7 @@ namespace DHB_Win.Controllers
         {
             return _context.Achievements != null
                 ? View(await _context.Achievements.ToListAsync())
-                : Problem("Entity set 'DHBWinDbContext.Achievements'  is null.");
+                : Problem("Entity set 'dhbwinContext.Achievements'  is null.");
         }
 
         // GET: Achievement/Details/5
@@ -145,7 +148,7 @@ namespace DHB_Win.Controllers
         {
             if (_context.Achievements == null)
             {
-                return Problem("Entity set 'DHBWinDbContext.Achievements'  is null.");
+                return Problem("Entity set 'dhbwinContext.Achievements'  is null.");
             }
 
             var achievement = await _context.Achievements.FindAsync(id);
