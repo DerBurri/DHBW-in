@@ -5,51 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Benutzerprofil</h1>
+<h1>Index</h1>
 
 <p>
-     @Html.ActionLink("Daten bearbeiten aCtion link", "Edit", "User", new {id=5})
-  <a asp-controller="UserController" asp-action="Edit">Daten bearbeiten asp action</a> <!-- beide Varianten werden net gefunden ....?!-->
+    <a asp-action="Create">Create New</a>
 </p>
-<div class="card card-widget widget-user">
-
-<div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
-<h3 class="widget-user-username text-right">Elizabeth Pierce</h3>
-<h5 class="widget-user-desc text-right">Web Designer</h5>
-</div>
-<div class="widget-user-image">
-<img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
-</div>
-<div class="card-footer">
-<div class="row">
-<div class="col-sm-4 border-right">
-<div class="description-block">
-<h5 class="description-header">3,200</h5>
-<span class="description-text">SALES</span>
-</div>
-
-</div>
-
-<div class="col-sm-4 border-right">
-<div class="description-block">
-<h5 class="description-header">13,000</h5>
-<span class="description-text">FOLLOWERS</span>
-</div>
-
-</div>
-
-<div class="col-sm-4">
-<div class="description-block">
-<h5 class="description-header">35</h5>
-<span class="description-text">PRODUCTS</span>
-</div>
-
-</div>
-
-</div>
-
-</div>
-</div>
 <table class="table">
     <thead>
     <tr>
@@ -85,7 +45,7 @@
     </thead>
     <tbody>
     @foreach (var item in Model)
-    { 
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Firstname)
@@ -115,6 +75,9 @@
                 @Html.DisplayFor(modelItem => item.PlzFkNavigation.Plz1)
             </td>
             <td>
+                <a asp-action="Edit" asp-route-id="@item.Uid">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Uid">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Uid">Delete</a>
             </td>
         </tr>
     }
