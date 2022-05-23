@@ -26,10 +26,14 @@ namespace DHB_Win.Models
 
         [Display(Name = "Erfahrungspunkte")]
         [Required(ErrorMessage = "Erfahrungspunkte sind notwendig")]
+        [Range(0, 10,
+        ErrorMessage = "Erfahrungspunkte dürfen nicht über 10 sein")]
         public int? ExpPoints { get; set; }
 
         [Display(Name = "Belohnung")]
         [Required(ErrorMessage = "Belohnung ist notwendig")]
+        [Range(0, 100,
+        ErrorMessage = "Beohnung darf nicht über 100 sein")]
         public int? Reward { get; set; }
 
         [Display(Name = "Beschreibung")]
