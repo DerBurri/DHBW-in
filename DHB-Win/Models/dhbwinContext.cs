@@ -39,18 +39,23 @@ namespace DHB_Win.Models
         {
             modelBuilder.Entity<AchievedAchievement>(entity =>
             {
-                entity.HasKey(e => new {e.AchIdFk, e.UidFk})
-                    .HasName("AchievedAchievement_pk")
-                    .IsClustered(false);
+                entity.HasKey(e => e.Aaid)
+                    .HasName("AAID_PK");
 
                 entity.ToTable("AchievedAchievement", "dhbwin");
 
                 entity.HasIndex(e => e.AchIdFk, "AchievedAchievement_AchID_fk_uindex")
                     .IsUnique();
 
+                entity.Property(e => e.Aaid)
+                    .ValueGeneratedNever()
+                    .HasColumnName("AAID");
+
                 entity.Property(e => e.AchIdFk)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("AchID_fk");
+
+                entity.Property(e => e.CreationDate).HasColumnType("datetime");
 
                 entity.Property(e => e.UidFk).HasColumnName("UID_fk");
 
