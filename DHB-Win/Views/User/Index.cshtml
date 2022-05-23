@@ -8,8 +8,8 @@
 <h1>Benutzerprofil</h1>
 
 <p>
-     @Html.ActionLink("Daten bearbeiten aCtion link", "Edit", "User", new {Uid=5})
-  <a asp-controller="User" asp-action="Edit">Daten bearbeiten asp action</a> <!-- beide Varianten werden net gefunden ....?!-->
+     @Html.ActionLink("Daten bearbeiten aCtion link", "Edit", "User", new {id=5})
+  <a asp-controller="UserController" asp-action="Edit">Daten bearbeiten asp action</a> <!-- beide Varianten werden net gefunden ....?!-->
 </p>
 <div class="card card-widget widget-user">
 

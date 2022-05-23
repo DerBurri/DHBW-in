@@ -70,6 +70,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: User/Edit/5
+        [Route("Edit")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
