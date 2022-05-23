@@ -29,7 +29,7 @@ namespace DHB_Win.Controllers
         public IActionResult Contact()
         {
             //string? test = _context.Achievement.Find("test").Title;
-            return View();
+            return View(); 
         }
 
 
