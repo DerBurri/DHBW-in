@@ -59,7 +59,7 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints")] Job job)
+            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints")] Job job)
+            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")] Job job)
         {
             if (id != job.JobId)
             {
