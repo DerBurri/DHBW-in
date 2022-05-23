@@ -36,6 +36,7 @@ namespace DHB_Win.Models
         [Required(ErrorMessage = "Beschreibung ist notwendig")]
         public string? Description { get; set; }
 
+        [Display(Name = "User")]
         public virtual User? UidFk2Navigation { get; set; }
         public virtual ICollection<BetOption> BetOptions { get; set; }
         public virtual ICollection<Placement> Placements { get; set; }
