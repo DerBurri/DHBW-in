@@ -39,6 +39,8 @@ namespace DHB_Win.Models
         [Display(Name = "Beschreibung")]
         [Required(ErrorMessage = "Beschreibung ist notwendig")]
         public string? Description { get; set; }
+
+        [Display(Name = "Datum")]
         public DateTime? CreationDate { get; set; }
 
         [Display(Name = "User")]

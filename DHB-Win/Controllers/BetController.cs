@@ -56,7 +56,7 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description")] Bet bet)
+        public async Task<IActionResult> Create([Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description")] Bet bet)
+        public async Task<IActionResult> Edit(int id, [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (id != bet.BetId)
             {

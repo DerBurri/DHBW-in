@@ -41,9 +41,15 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.UidFk2Navigation.Uid)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.BetId" class="btn btn-primary">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.BetId" class="btn btn-primary">Bearbeiten</a> |
     <a asp-action="Index">Zurück zu den Wetten</a>
 </div>
