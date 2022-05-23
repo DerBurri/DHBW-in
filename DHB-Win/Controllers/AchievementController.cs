@@ -56,7 +56,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("AchId,Title,Description,ExpPoints,Reward")] Achievement achievement)
+            [Bind("AchId,Title,Description,ExpPoints,Reward")]
+            Achievement achievement)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +92,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("AchId,Title,Description,ExpPoints,Reward")] Achievement achievement)
+            [Bind("AchId,Title,Description,ExpPoints,Reward")]
+            Achievement achievement)
         {
             if (id != achievement.AchId)
             {

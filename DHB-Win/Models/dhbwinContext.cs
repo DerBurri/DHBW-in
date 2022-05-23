@@ -201,12 +201,6 @@ namespace DHB_Win.Models
 
                 entity.ToTable("Placement", "dhbwin");
 
-                entity.HasIndex(e => e.BetIdFk, "Placement_BetID_fk_uindex")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.PlacementId, "Placement_PlacementID_uindex")
-                    .IsUnique();
-
                 entity.Property(e => e.UidFk).HasColumnName("UID_fk");
 
                 entity.Property(e => e.PlacementId)
@@ -218,8 +212,8 @@ namespace DHB_Win.Models
                 entity.Property(e => e.OptionIdFk).HasColumnName("OptionID_fk");
 
                 entity.HasOne(d => d.BetIdFkNavigation)
-                    .WithOne(p => p.Placement)
-                    .HasForeignKey<Placement>(d => d.BetIdFk)
+                    .WithMany(p => p.Placements)
+                    .HasForeignKey(d => d.BetIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Bet_fk");
 
