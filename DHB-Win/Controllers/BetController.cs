@@ -125,6 +125,13 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
+        public async Task<IActionResult> History()
+        {
+            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
+            return View(await dhbwinContext.ToListAsync());
+        }
+
+
         // GET: Bet/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
