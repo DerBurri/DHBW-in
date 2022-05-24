@@ -5,33 +5,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Alle verfügbaren Achievements</h1>
+<br>
 
-<div>
-    <h4>AchievedAchievement</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AchIdFkNavigation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AchIdFkNavigation.AchId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UidFkNavigation)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UidFkNavigation.Uid)
-        </dd>
-    </dl>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2 bg-gradient-dark">
+                <img class="card-img-top" src="../dist/img/photo1.png" alt="Dist Photo 1">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                    <h5 class="card-title text-primary text-white">Slumdog Millionaire</h5>
+                    <p class="card-text text-white pb-2 pt-1">Steige in die Top 10 auf.</p>
+                    <a class="text-white">20 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo2.png" alt="Dist Photo 2">
+                <div class="card-img-overlay d-flex flex-column justify-content-center">
+                    <h5 class="card-title text-white mt-5 pt-2">Who´s Bezos?</h5>
+                    <p class="card-text pb-2 pt-1 text-white">
+                       Führe die Highscore-Liste an.
+                    </p>
+                    <a class="text-white">	100 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
+                <div class="card-img-overlay">
+                    <h5 class="card-title text-white">Schwabe</h5>
+                    <p class="card-text pb-1 pt-1 text-white">
+                      Gewinne eine Wette mit einer Erfolgsquote von über 80%
+                    </p>
+                    <a class="text-white">2 Betcoin</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Aaid">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<br>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2 bg-gradient-dark">
+                <img class="card-img-top" src="../dist/img/photo1.png" alt="Dist Photo 1">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                    <h5 class="card-title text-primary text-white">Anfängerglück</h5>
+                    <p class="card-text text-white pb-2 pt-1">Gewinne 3 Wetten in Folge.</p>
+                    <a class="text-white">5 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo2.png" alt="Dist Photo 2">
+                <div class="card-img-overlay d-flex flex-column justify-content-center">
+                    <h5 class="card-title text-white mt-5 pt-2">Der Prophet</h5>
+                    <p class="card-text pb-2 pt-1 text-white">
+                       Gewinne 10 Wetten in Folge.
+                    </p>
+                    <a class="text-white">	20 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
+                <div class="card-img-overlay">
+                    <h5 class="card-title text-white">Hitman</h5>
+                    <p class="card-text pb-1 pt-1 text-white">
+                     Schließe deinen ersten Auftrag ab.
+                    </p>
+                    <a class="text-white">5 Betcoin</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<br>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2 bg-gradient-dark">
+                <img class="card-img-top" src="../dist/img/photo1.png" alt="Dist Photo 1">
+                <div class="card-img-overlay d-flex flex-column justify-content-end">
+                    <h5 class="card-title text-primary text-white">El Gordo</h5>
+                    <p class="card-text text-white pb-2 pt-1">Gewinne eine Wette mit einer Erfolgsquote unter 10%</p>
+                    <a class="text-white">25 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo2.png" alt="Dist Photo 2">
+                <div class="card-img-overlay d-flex flex-column justify-content-center">
+                    <h5 class="card-title text-white mt-5 pt-2">Ezio Auditore</h5>
+                    <p class="card-text pb-2 pt-1 text-white">
+                      Schließe 20 Aufträge ab.
+                    </p>
+                    <a class="text-white">	50 Betcoin</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-6 col-xl-4">
+            <div class="card mb-2">
+                <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
+                <div class="card-img-overlay">
+                    <h5 class="card-title text-white">Trendsetter</h5>
+                    <p class="card-text pb-1 pt-1 text-white">
+                    Erstelle eine Wette mit mehr als 10 Teilnehmern.
+                    </p>
+                    <a class="text-white">10 Betcoin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <a asp-action="Index" class="btn btn-sm btn-info float-left">Zurück zu den Achievements</a><br><br>
+

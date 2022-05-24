@@ -27,23 +27,14 @@ namespace DHB_Win.Controllers
         }
 
         // GET: AchievedAchievements/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null || _context.AchievedAchievements == null)
+            if ( _context.AchievedAchievements == null)
             {
                 return NotFound();
             }
 
-            var achievedAchievement = await _context.AchievedAchievements
-                .Include(a => a.AchIdFkNavigation)
-                .Include(a => a.UidFkNavigation)
-                .FirstOrDefaultAsync(m => m.Aaid == id);
-            if (achievedAchievement == null)
-            {
-                return NotFound();
-            }
-
-            return View(achievedAchievement);
+            return View();
         }
 
         // GET: AchievedAchievements/Create

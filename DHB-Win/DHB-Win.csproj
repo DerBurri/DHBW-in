@@ -28,9 +28,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Areas"/>
+        <Folder Include="Areas" />
         <Folder Include="Migrations" />
-        <Folder Include="Models"/>
+        <Folder Include="Models" />
         <Folder Include="sql" />
     </ItemGroup>
 
@@ -39,6 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Views\AchievedAchievements\Details.cshtml" />
       <None Remove="Views\Home\Contact.cshtml" />
       <None Remove="Views\User\Edit.cshtml" />
     </ItemGroup>
@@ -2083,59 +2084,59 @@
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo3.jpg" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo4.jpg" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-1.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user2-160x160.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user3-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user4-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user5-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user6-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user7-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user8-128x128.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\.eslintrc.json"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.js.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.min.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.min.js.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard2.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard3.js"/>
-        <_ContentIncludedByDefault Remove="Views\Placement\Create.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Placement\Delete.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Placement\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Placement\Edit.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Placement\Index.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Job\Create.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Job\Delete.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Job\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Job\Edit.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Job\Index.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Bet\Create.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Bet\Delete.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Bet\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Bet\Edit.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Bet\Index.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Achievement\Create.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Achievement\Delete.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Achievement\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Achievement\Edit.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\Achievement\Index.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\DHBW\Create.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\DHBW\Delete.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\DHBW\Details.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\DHBW\Edit.cshtml"/>
-        <_ContentIncludedByDefault Remove="Views\DHBW\Index.cshtml"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user2-160x160.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user3-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user4-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user5-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user6-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user7-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user8-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\.eslintrc.json" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.min.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\adminlte.min.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard2.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\js\pages\dashboard3.js" />
+        <_ContentIncludedByDefault Remove="Views\Placement\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Placement\Delete.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Placement\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Placement\Edit.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Placement\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Delete.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Edit.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Bet\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Bet\Delete.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Bet\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Bet\Edit.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Bet\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Achievement\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Achievement\Delete.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Achievement\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Achievement\Edit.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Achievement\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\DHBW\Create.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\DHBW\Delete.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\DHBW\Details.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\DHBW\Edit.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\DHBW\Index.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
-        <UpToDateCheckInput Remove="Views\Job\Create.cshtml"/>
-        <UpToDateCheckInput Remove="Views\Job\Delete.cshtml"/>
-        <UpToDateCheckInput Remove="Views\Job\Details.cshtml"/>
-        <UpToDateCheckInput Remove="Views\Job\Edit.cshtml"/>
-        <UpToDateCheckInput Remove="Views\Job\Index.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Create.cshtml" />
+        <UpToDateCheckInput Remove="Views\Job\Delete.cshtml" />
+        <UpToDateCheckInput Remove="Views\Job\Details.cshtml" />
+        <UpToDateCheckInput Remove="Views\Job\Edit.cshtml" />
+        <UpToDateCheckInput Remove="Views\Job\Index.cshtml" />
     </ItemGroup>
 
 
