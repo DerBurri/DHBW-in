@@ -20,15 +20,16 @@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control"/>
+                
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ExpPoints" class="control-label"></label>
+                <label asp-for="ExpPoints" class="control-label"></label><br><small>max 10</small>
                 <input asp-for="ExpPoints" class="form-control"/>
                 <span asp-validation-for="ExpPoints" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Reward" class="control-label"></label>
+                <label asp-for="Reward" class="control-label"></label><br><small>max 100</small>
                 <input asp-for="Reward" class="form-control"/>
                 <span asp-validation-for="Reward" class="text-danger"></span>
             </div>
@@ -39,7 +40,7 @@
             </div>
              <div class="form-group">
                 <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control"/>
+                <input asp-for="CreationDate" class="form-control" />
                 <span asp-validation-for="CreationDate" class="text-danger"></span>
             </div>
             <div class="form-group">
