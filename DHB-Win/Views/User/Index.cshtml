@@ -5,81 +5,72 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Firstname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EMail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Street)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpPoints)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PasswordHash)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Walletbalance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Profilepicture)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlzFkNavigation)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Firstname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpPoints)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PasswordHash)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Walletbalance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Profilepicture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlzFkNavigation.Plz1)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Uid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Uid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Uid">Delete</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+
+<div class="card card-widget widget-user">
+
+    <div class="widget-user-header text-white" style="background: url('../dist/img/photo1.png') center center;">
+        <h3 class="widget-user-username text-right">SIMONSTER BURRI@*@Html.DisplayFor(modelItem => model.Firstname)  @Html.DisplayFor(model => model.)*@</h3>
+        <h5 class="widget-user-desc text-right">Benutzerprofil</h5>
+    </div>
+    <div class="widget-user-image">
+        <img class="img-circle" src="../dist/img/user3-128x128.jpg" alt="User Avatar">
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-sm-4 border-right">
+                <div class="description-block">
+                    <h5 class="description-header">3,200</h5>
+                    <span class="description-text">SALES</span>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4 border-right">
+                <div class="description-block">
+                    <h5 class="description-header">100000@*@Html.DisplayFor(modelItem => model.Uid.Walletbalance)*@</h5>
+                    <span class="description-text">@Html.DisplayNameFor(model => model.Walletbalance)</span>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <div class="description-block">
+                    <h5 class="description-header">35@*@Html.DisplayFor(model => model.ExpPoints)*@</h5>
+                    <span class="description-text">@Html.DisplayNameFor(model => model.ExpPoints)</span>
+                </div>
+
+            </div>
+            <br>
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header">MAMAMAM</h5>
+                        <span class="description-text">@Html.DisplayNameFor(model => model.EMail)</span>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header">MAMAMAM</h5>
+                        <span class="description-text">  @Html.DisplayNameFor(model => model.Street)</span>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="description-block">
+                        <h5 class="description-header">MAMAMAM</h5>
+                        <span class="description-text">@Html.DisplayNameFor(model => model.PlzFkNavigation)</span>
+                    </div>
+
+                </div>
+                <br>
+                 <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="2">@*asp-route-id="@item.Uid"*@
+                                    <i class="fas fa-pencil-alt">
+                                    </i>
+                                    Bearbeiten
+                                </a>
+
+        </div>
+
+    </div>
+</div>
