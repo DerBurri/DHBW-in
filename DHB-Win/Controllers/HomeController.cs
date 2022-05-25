@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.Linq;
+using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -8,13 +10,13 @@ namespace DHB_Win.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        //private readonly dhbwinContext _context;
+        private readonly dhbwinContext _context;
 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, dhbwinContext context)
         {
             _logger = logger;
-            // _context = context;
+            _context=context;
         }
 
         [Route("")]
@@ -22,6 +24,7 @@ namespace DHB_Win.Controllers
         [Route("~/")]
         public IActionResult Index()
         {
+            ViewBag.Bets = _context.Bets.Select(x => x).ToList();
             return View();
         }
 

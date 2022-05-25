@@ -7,6 +7,10 @@
 
 <section class="content">
 
+     @foreach(@DHB_Win.Models.Bet item in ViewBag.Bets)
+    {
+            <p>@item.Title</p>
+    }
 @*
    <table class="table table-striped projects">
     <thead>
