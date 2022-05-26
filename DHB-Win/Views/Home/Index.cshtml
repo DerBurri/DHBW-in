@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     //HOMEPAGE
 }
@@ -9,235 +7,237 @@
     <img src="~/dist/img/AdminLTELogo.png">
     &nbsp;&nbsp;
     <h1>Wetten</h1>
-  <table class="table table-striped projects">
-    <thead>
-        <tr>
-            <th>
-                Bet ID
-            </th>
-            <th>
-                Titel       
-            </th>
-            <th>
-                Beschreibung
-            </th>
-            <th>
-               User
-            </th>
-            <th style="width:5%">
-                Erfahrungspunkte
-            </th>
-            <th>
-                Belohnung
-            </th>
-            <th>Optionen</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        
-     @foreach(@DHB_Win.Models.Bet item in ViewBag.Bets)
-        {
+    <table class="table table-striped projects">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem =>item.BetId)
-                </td>
-                <td>
-                    <a>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </a>
-                    <br>
-                    <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+                <th>
+                    Bet ID
+                </th>
+                <th>
+                    Titel
+                </th>
+                <th>
+                    Beschreibung
+                </th>
+                <th>
+                    User
+                </th>
+                <th style="width:5%">
+                    Erfahrungspunkte
+                </th>
+                <th>
+                    Belohnung
+                </th>
+                <th>Optionen</th>
 
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UidFk2Navigation.Uid) @*Profilbild und Username hier rein?*@
-                </td>
-
-                <td class="project-state">
-                    <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
-                </td>
-                <td class="project_progress">
-                    <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
-                        </div>
-                    </div>
-                    <small>
-                        @Html.DisplayFor(modelItem => item.Reward) Betcoins
-                    </small>
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" asp-controller="Bet" asp-action="Details" asp-route-id="@item.BetId">
-                        <i class="fas fa-folder">
-                        </i>
-                        Details
-                    </a>
-                    <a class="btn btn-info btn-sm" asp-controller="Bet" asp-action="Edit" asp-route-id="@item.BetId">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Bearbeiten
-                    </a>
-                    <a class="btn btn-danger btn-sm" asp-controller="Bet" asp-action="Delete" asp-route-id="@item.BetId">
-                        <i class="fas fa-trash">
-                        </i>
-                        Löschen
-                    </a>
-                </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (@DHB_Win.Models.Bet item in ViewBag.Bets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem =>item.BetId)
+                    </td>
+                    <td>
+                        <a>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </a>
+                        <br>
+                        <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UidFk2Navigation.Uid) @*Profilbild und Username hier rein?*@
+                    </td>
+
+                    <td class="project-state">
+                        <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+                    </td>
+                    <td class="project_progress">
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+                            </div>
+                        </div>
+                        <small>
+                            @Html.DisplayFor(modelItem => item.Reward) Betcoins
+                        </small>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" asp-controller="Bet" asp-action="Details" asp-route-id="@item.BetId">
+                            <i class="fas fa-folder">
+                            </i>
+                            Details
+                        </a>
+                        <a class="btn btn-info btn-sm" asp-controller="Bet" asp-action="Edit" asp-route-id="@item.BetId">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Bearbeiten
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Bet" asp-action="Delete" asp-route-id="@item.BetId">
+                            <i class="fas fa-trash">
+                            </i>
+                            Löschen
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </section>
 &nbsp;    &nbsp;
 <section>
-        <h1>Aufträge</h1>
-        &nbsp;    &nbsp;
-<table class="table table-striped projects">
-    <thead>
-        <tr>
-            <th>
-                Job ID
-            </th>
-            <th>
-                Titel
-            </th>
-            <th>
-                Beschreibung
-            </th>
-            <th>
-                Anbieter
-            </th>
-            <th style="width:5%">
-                Erfahrungspunkte
-            </th>
-            <th>
-                Belohnung
-            </th>
-            <th>
-                Enddatum
-            </th>
-            <th>
-                Arbeiter
-            </th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (@DHB_Win.Models.Job item in ViewBag.Jobs)
-        {
+    <h1>Aufträge</h1>
+    &nbsp;    &nbsp;
+    <table class="table table-striped projects">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                    <br>
-                    <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Provider.Uid) @*Profilbild und Username*@
-                </td>
-                <td class="project-state">
-                    <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
-                </td>
-                <td class="project_progress">
-                    <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+                <th>
+                    Job ID
+                </th>
+                <th>
+                    Titel
+                </th>
+                <th>
+                    Beschreibung
+                </th>
+                <th>
+                    Anbieter
+                </th>
+                <th style="width:5%">
+                    Erfahrungspunkte
+                </th>
+                <th>
+                    Belohnung
+                </th>
+                <th>
+                    Enddatum
+                </th>
+                <th>
+                    Arbeiter
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (@DHB_Win.Models.Job item in ViewBag.Jobs)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                        <br>
+                        <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Provider.Uid) @*Profilbild und Username*@
+                    </td>
+                    <td class="project-state">
+                        <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+                    </td>
+                    <td class="project_progress">
+                        <div class="progress progress-sm">
+                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+                            </div>
+                        </div>
+                        <small>
+                            @Html.DisplayFor(modelItem => item.Reward) Betcoins
+                        </small>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinishDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Worker.Uid)
+
+                        @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
+                    <span asp-validation-for="WorkerId" class="text-danger"></span>
+                    irgendwie direkt die Teilnahme ermöglichen*@
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="submit" value="Teilnehmen" class="btn btn-primary" />
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" asp-controller="Job" asp-action="Details" asp-route-id="@item.JobId">
+                            <i class="fas fa-folder">
+                            </i>
+                            Details
+                        </a>
+                        <a class="btn btn-info btn-sm" asp-controller="Job" asp-action="Edit" asp-route-id="@item.JobId">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Bearbeiten
+                        </a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Job" asp-action="Delete" asp-route-id="@item.JobId">
+                            <i class="fas fa-trash">
+                            </i>
+                            Löschen
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h1>Achievements</h1>
+    &nbsp;    &nbsp;
+    <section>
+        @foreach (@DHB_Win.Models.AchievedAchievement item in ViewBag.AchievedAchievement)
+        {
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6 col-xl-4">
+                        <div class="card mb-2 bg-gradient-dark">
+                            <img class="card-img-top" src="../dist/img/photo1.png" alt="Dist Photo 1">
+                            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                <h5 class="card-title text-primary text-white">
+                                   TEST
+                                </h5>
+                                <p class="card-text text-white pb-2 pt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor.</p>
+                                <a href="#" class="text-white">Last update 2 mins ago</a>
+                            </div>
                         </div>
                     </div>
-                    <small>
-                        @Html.DisplayFor(modelItem => item.Reward) Betcoins
-                    </small>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FinishDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Worker.Uid)
-
-                    @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
-                <span asp-validation-for="WorkerId" class="text-danger"></span>
-                irgendwie direkt die Teilnahme ermöglichen*@
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" value="Teilnehmen" class="btn btn-primary" />
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" asp-controller="Job" asp-action="Details" asp-route-id="@item.JobId">
-                        <i class="fas fa-folder">
-                        </i>
-                        Details
-                    </a>
-                    <a class="btn btn-info btn-sm" asp-controller="Job" asp-action="Edit" asp-route-id="@item.JobId">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Bearbeiten
-                    </a>
-                    <a class="btn btn-danger btn-sm" asp-controller="Job" asp-action="Delete" asp-route-id="@item.JobId">
-                        <i class="fas fa-trash">
-                        </i>
-                        Löschen
-                    </a>
-                </td>
-            </tr>
+                    <div class="col-md-12 col-lg-6 col-xl-4">
+                        <div class="card mb-2">
+                            <img class="card-img-top" src="../dist/img/photo2.png" alt="Dist Photo 2">
+                            <div class="card-img-overlay d-flex flex-column justify-content-center">
+                                <h5 class="card-title text-white mt-5 pt-2">Card Title</h5>
+                                <p class="card-text pb-2 pt-1 text-white">
+                                    Lorem ipsum dolor sit amet, <br>
+                                    consectetur adipisicing elit <br>
+                                    sed do eiusmod tempor.
+                                </p>
+                                <a class="text-white">Last update 15 hours ago</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6 col-xl-4">
+                        <div class="card mb-2">
+                            <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
+                            <div class="card-img-overlay">
+                                <h5 class="card-title text-primary">Card Title</h5>
+                                <p class="card-text pb-1 pt-1 text-white">
+                                    Lorem ipsum dolor <br>
+                                    sit amet, consectetur <br>
+                                    adipisicing elit sed <br>
+                                    do eiusmod tempor.
+                                </p>
+                                <a href="#" class="text-primary">Last update 3 days ago</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
-</section>
-
-<section>   
-        <h1>Achievements</h1>
-        &nbsp;    &nbsp;
-        <section>
-         @foreach (@DHB_Win.Models.AchievedAchievement item in ViewBag.Achievements)
-        {
-           <div class="card-body">
-    <div class="row">
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="card mb-2 bg-gradient-dark">
-                <img class="card-img-top" src="../dist/img/photo1.png" alt="Dist Photo 1">
-                <div class="card-img-overlay d-flex flex-column justify-content-end">
-                    <h5 class="card-title text-primary text-white">@ViewBag.Achieve</h5>
-                    <p class="card-text text-white pb-2 pt-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmod tempor.</p>
-                    <a href="#" class="text-white">Last update 2 mins ago</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="card mb-2">
-                <img class="card-img-top" src="../dist/img/photo2.png" alt="Dist Photo 2">
-                <div class="card-img-overlay d-flex flex-column justify-content-center">
-                    <h5 class="card-title text-white mt-5 pt-2">Card Title</h5>
-                    <p class="card-text pb-2 pt-1 text-white">
-                        Lorem ipsum dolor sit amet, <br>
-                        consectetur adipisicing elit <br>
-                        sed do eiusmod tempor.
-                    </p>
-                    <a class="text-white">Last update 15 hours ago</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-lg-6 col-xl-4">
-            <div class="card mb-2">
-                <img class="card-img-top" src="../dist/img/photo3.jpg" alt="Dist Photo 3">
-                <div class="card-img-overlay">
-                    <h5 class="card-title text-primary">Card Title</h5>
-                    <p class="card-text pb-1 pt-1 text-white">
-                        Lorem ipsum dolor <br>
-                        sit amet, consectetur <br>
-                        adipisicing elit sed <br>
-                        do eiusmod tempor.
-                    </p>
-                    <a href="#" class="text-primary">Last update 3 days ago</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-        }
-</section>
+    </section>

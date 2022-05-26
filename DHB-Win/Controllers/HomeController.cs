@@ -25,7 +25,8 @@ namespace DHB_Win.Controllers
         {
             ViewBag.Bets = _context.Bets.Select(x => x).ToList();
             ViewBag.Jobs = _context.Jobs.Select(x => x).ToList();
-            ViewBag.Achievements = _context.AchievedAchievements.Select(x => x).ToList();
+            ViewBag.AchievedAchievement = _context.AchievedAchievements.Select(x => x).ToList();
+            ViewBag.Achievement = _context.Achievements.Select(x => x).ToList();
             return View();
         }
 
