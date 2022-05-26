@@ -12,7 +12,6 @@ namespace DHB_Win.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly dhbwinContext _context;
 
-
         public HomeController(ILogger<HomeController> logger, dhbwinContext context)
         {
             _logger = logger;
