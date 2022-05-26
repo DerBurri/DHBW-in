@@ -24,6 +24,7 @@ namespace DHB_Win.Controllers
         public IActionResult Index()
         {
             ViewBag.Bets = _context.Bets.Select(x => x).ToList();
+            ViewBag.Jobs = _context.Jobs.Select(x => x).ToList();
             return View();
         }
 

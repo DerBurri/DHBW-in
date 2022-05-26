@@ -21,7 +21,7 @@ namespace DHB_Win.Controllers
         // GET: Job
         public async Task<IActionResult> Index()
         {
-            ViewBag.achievements = _context.Achievements.Select(x => x).ToList();
+            //ViewBag.achievements = _context.Achievements.Select(x => x).ToList();
 
             var dhbwinContext = _context.Jobs.Include(j => j.Provider).Include(j => j.Worker);
             return View(await dhbwinContext.ToListAsync());
