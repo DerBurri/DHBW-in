@@ -52,7 +52,7 @@ namespace DHB_Win.Models
         [Display(Name = "Profilbild")]
         public int? Profilepicture { get; set; }
 
-
+        [Display(Name = "Postleitzahl")]
         public virtual Plz? PlzFkNavigation { get; set; }
         public virtual ICollection<AchievedAchievement> AchievedAchievements { get; set; }
         public virtual ICollection<Bet> Bets { get; set; }
