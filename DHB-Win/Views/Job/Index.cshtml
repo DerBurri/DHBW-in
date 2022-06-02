@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Aufträge</h1>
+<h1>Auftrï¿½ge</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-sm btn-info float-left">Neuen Auftrag erstellen</a>
@@ -15,94 +15,94 @@
 
 <table class="table table-striped projects">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.JobId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provider)
-            </th>
-            <th style="width:5%">
-                @Html.DisplayNameFor(model => model.ExpPoints)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reward)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FinishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Worker)
-            </th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Provider)
+        </th>
+        <th style="width:5%">
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reward)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Worker)
+        </th>
 
-        </tr>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.JobId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                    <br>
-                    <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Provider.Uid) @*Profilbild und Username*@
-                </td>
-                <td class="project-state">
-                    <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
-                </td>
-                <td class="project_progress">
-                    <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
-                        </div>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+                <br>
+                <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provider.Id) @*Profilbild und Username*@
+            </td>
+            <td class="project-state">
+                <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+            </td>
+            <td class="project_progress">
+                <div class="progress progress-sm">
+                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
                     </div>
-                    <small>
-                        @Html.DisplayFor(modelItem => item.Reward) Betcoins
-                    </small>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FinishDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Worker.Uid)
+                </div>
+                <small>
+                    @Html.DisplayFor(modelItem => item.Reward) Betcoins
+                </small>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Worker.Id)
 
-                    @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
+                @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
-                irgendwie direkt die Teilnahme ermöglichen*@
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" value="Teilnehmen" class="btn btn-primary" />
-                </td>
-                <td class="project-actions text-right">
-                    <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.JobId">
-                        <i class="fas fa-folder">
-                        </i>
-                        Details
-                    </a>
-                    <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.JobId">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Bearbeiten
-                    </a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.JobId">
-                        <i class="fas fa-trash">
-                        </i>
-                        Löschen
-                    </a>
-                </td>
-            </tr>
-        }
+                irgendwie direkt die Teilnahme ermï¿½glichen*@
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Teilnehmen" class="btn btn-primary"/>
+            </td>
+            <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.JobId">
+                    <i class="fas fa-folder">
+                    </i>
+                    Details
+                </a>
+                <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.JobId">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Bearbeiten
+                </a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.JobId">
+                    <i class="fas fa-trash">
+                    </i>
+                    Lï¿½schen
+                </a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

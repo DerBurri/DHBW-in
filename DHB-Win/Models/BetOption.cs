@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DHB_Win.Models
 {
@@ -10,8 +9,8 @@ namespace DHB_Win.Models
             Placements = new HashSet<Placement>();
         }
 
-        public int OptionsId { get; set; }
-        public int? BetId { get; set; }
+        public string OptionsId { get; set; }
+        public string? BetId { get; set; }
         public string? Title { get; set; }
         public string? Descpription { get; set; }
         public int? QuoteValue { get; set; }

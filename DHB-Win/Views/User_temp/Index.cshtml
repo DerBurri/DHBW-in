@@ -1,10 +1,9 @@
 @model IEnumerable<DHB_Win.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 
 <div class="card card-widget widget-user">
@@ -29,7 +28,7 @@
             <div class="col-sm-4 border-right">
                 <div class="description-block">
                     <h5 class="description-header">100000@*@Html.DisplayFor(modelItem => model.Uid.Walletbalance)*@</h5>
-                    <span class="description-text">@Html.DisplayNameFor(model => model.Walletbalance)</span>
+                    <span class="description-text">@Html.DisplayNameFor(model => model.WalletBalance)</span>
                 </div>
 
             </div>
@@ -42,33 +41,34 @@
 
             </div>
             <br>
-                <div class="col-sm-4">
-                    <div class="description-block">
-                        <h5 class="description-header">MAMAMAM</h5>
-                        <span class="description-text">@Html.DisplayNameFor(model => model.EMail)</span>
-                    </div>
-
+            <div class="col-sm-4">
+                <div class="description-block">
+                    <h5 class="description-header">MAMAMAM</h5>
+                    <span class="description-text">@Html.DisplayNameFor(model => model.Email)</span>
                 </div>
-                <div class="col-sm-4">
-                    <div class="description-block">
-                        <h5 class="description-header">MAMAMAM</h5>
-                        <span class="description-text">  @Html.DisplayNameFor(model => model.Street)</span>
-                    </div>
 
+            </div>
+            <div class="col-sm-4">
+                <div class="description-block">
+                    <h5 class="description-header">MAMAMAM</h5>
+                    <span class="description-text"> Html.DisplayNameFor(model => model.)</span>
                 </div>
-                <div class="col-sm-4">
-                    <div class="description-block">
-                        <h5 class="description-header">MAMAMAM</h5>
-                        <span class="description-text">@Html.DisplayNameFor(model => model.PlzFkNavigation)</span>
-                    </div>
 
+            </div>
+            <div class="col-sm-4">
+                <div class="description-block">
+                    <h5 class="description-header">MAMAMAM</h5>
+                    <span class="description-text">Html.DisplayNameFor(model => model.PlzFkNavigation)</span>
                 </div>
-                <br>
-                 <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="2">@*asp-route-id="@item.Uid"*@
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Bearbeiten
-                                </a>
+
+            </div>
+            <br>
+            <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="2">
+                @*asp-route-id="@item.Uid"*@
+                <i class="fas fa-pencil-alt">
+                </i>
+                Bearbeiten
+            </a>
 
         </div>
 

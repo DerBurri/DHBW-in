@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DHB_Win.Data;
+using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
@@ -27,7 +26,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: Placement/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -78,7 +77,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: Placement/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -103,8 +102,9 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,
-            [Bind("PlacementId,BetIdFk,UidFk,OptionIdFk")] Placement placement)
+        public async Task<IActionResult> Edit(string id,
+            [Bind("PlacementId,BetIdFk,UidFk,OptionIdFk")]
+            Placement placement)
         {
             if (id != placement.UidFk)
             {
@@ -141,7 +141,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: Placement/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -181,7 +181,7 @@ namespace DHB_Win.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlacementExists(int id)
+        private bool PlacementExists(string id)
         {
             return (_context.Placements?.Any(e => e.UidFk == id)).GetValueOrDefault();
         }

@@ -13,6 +13,7 @@ create table dhbwin.BetOptions
     go
 
 create unique index BetOptions_OptionsID_uindex
-    on dhbwin.BetOptions (OptionsID)
-    go
+    on dhbwin.BetOptions (OptionsID) go
+
+go
 

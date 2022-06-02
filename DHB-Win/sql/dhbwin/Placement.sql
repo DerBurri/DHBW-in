@@ -24,6 +24,8 @@ create unique index Placement_BetID_fk_uindex
     go
 
 create unique index Placement_UID_fk_uindex
-    on dhbwin.Placement (UID_fk)
+    on dhbwin.Placement (UID_fk) go
+
+(UID_fk)
     go
 

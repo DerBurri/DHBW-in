@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DHB_Win.Models
 {
@@ -10,7 +9,7 @@ namespace DHB_Win.Models
             Users = new HashSet<User>();
         }
 
-        public int Plz1 { get; set; }
+        public string Plz1 { get; set; }
         public string? Ort { get; set; }
 
         public virtual ICollection<User> Users { get; set; }

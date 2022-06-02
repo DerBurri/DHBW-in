@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DHB_Win.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DHB_Win.Models
+namespace DHB_Win.Data
 {
-    public partial class dhbwinContext : DbContext
+    public partial class dhbwinContext : IdentityDbContext<User>
     {
         public dhbwinContext()
         {
@@ -29,9 +28,6 @@ namespace DHB_Win.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(
-                    "Server=tcp:database-dhbwin.database.windows.net,1433;Initial Catalog=dhbwin;Persist Security Info=False;User ID=dbadmin;Password=admin123!;");
             }
         }
 
@@ -263,20 +259,7 @@ namespace DHB_Win.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.Uid)
-                    .HasName("User_pk")
-                    .IsClustered(false);
-
                 entity.ToTable("User", "dhbwin");
-
-                entity.Property(e => e.Uid).HasColumnName("UID");
-
-                entity.Property(e => e.EMail)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("E-Mail")
-                    .IsFixedLength();
-
                 entity.Property(e => e.Firstname)
                     .HasMaxLength(25)
                     .IsUnicode(false)
@@ -304,6 +287,7 @@ namespace DHB_Win.Models
                     .HasForeignKey(d => d.PlzFk)
                     .HasConstraintName("PLZ_fk");
             });
+            base.OnModelCreating(modelBuilder);
 
             OnModelCreatingPartial(modelBuilder);
         }
