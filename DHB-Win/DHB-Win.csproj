@@ -43,6 +43,7 @@
       <None Remove="Views\Bet\History.cshtml" />
       <None Remove="Views\Home\Contact.cshtml" />
       <None Remove="Views\User\Edit.cshtml" />
+      <None Remove="Views\User\Login.cshtml" />
     </ItemGroup>
     
     <ItemGroup>

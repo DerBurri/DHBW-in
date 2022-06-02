@@ -25,6 +25,12 @@ namespace DHB_Win.Controllers
             return View(await dhbwinContext.ToListAsync());
         }
 
+        public async Task<IActionResult> Login()
+        {
+            //var dhbwinContext = _context.Users.Include(u => u.PlzFkNavigation);
+            return View();
+        }
+
         // GET: User/Details/5
         public async Task<IActionResult> Details(int? id)
         {
