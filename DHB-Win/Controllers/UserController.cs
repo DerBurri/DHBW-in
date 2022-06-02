@@ -23,7 +23,7 @@ namespace DHB_Win.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View("Areas/Identity/Pages/Account/Login.cshtml");
+            return View();
         }
 
         [HttpPost]

@@ -15,24 +15,22 @@ namespace DHB_Win.Models
             Placements = new HashSet<Placement>();
         }
 
-        public string Firstname;
+        [PersonalData] public string? Firstname;
+        [PersonalData] public string? Name;
+        [PersonalData] public string? Street;
+        [PersonalData] public string? Profilepicture;
 
-        public string Name;
+        public int? WalletBalance;
 
-        public int WalletBalance;
+        public int? ExpPoints;
 
-        public int ExpPoints;
-
-        public string Street;
-
-        public string Profilepicture;
 
         [Display(Name = "Postleitzahl")] public string PlzFk;
         public virtual Plz? PlzFkNavigation { get; set; }
-        public virtual ICollection<AchievedAchievement> AchievedAchievements { get; set; }
-        public virtual ICollection<Bet> Bets { get; set; }
-        public virtual ICollection<Job> JobProviders { get; set; }
-        public virtual ICollection<Job> JobWorkers { get; set; }
-        public virtual ICollection<Placement> Placements { get; set; }
+        public virtual ICollection<AchievedAchievement>? AchievedAchievements { get; set; }
+        public virtual ICollection<Bet>? Bets { get; set; }
+        public virtual ICollection<Job>? JobProviders { get; set; }
+        public virtual ICollection<Job>? JobWorkers { get; set; }
+        public virtual ICollection<Placement>? Placements { get; set; }
     }
 }

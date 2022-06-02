@@ -1,9 +1,7 @@
 using DHB_Win.Data;
 using DHB_Win.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,17 +21,15 @@ namespace DHB_Win
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()));
+            //services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()));
+            services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddDbContext<dhbwinContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("DHB-WinContext")));
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(o => o.LoginPath = "/user/login");
 
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<dhbwinContext>();
-            //services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
