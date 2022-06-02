@@ -31,14 +31,48 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="Views\**\*" />
+        <None Include="Views/AchievedAchievements/Create.cshtml"/>
+        <None Include="Views/AchievedAchievements/Delete.cshtml"/>
+        <None Include="Views/AchievedAchievements/Edit.cshtml"/>
+        <None Include="Views/AchievedAchievements/Index.cshtml"/>
+        <None Include="Views/Achievement/Create.cshtml"/>
+        <None Include="Views/Achievement/Delete.cshtml"/>
+        <None Include="Views/Achievement/Details.cshtml"/>
+        <None Include="Views/Achievement/Edit.cshtml"/>
+        <None Include="Views/Achievement/Index.cshtml"/>
+        <None Include="Views/Bet/Create.cshtml"/>
+        <None Include="Views/Bet/Delete.cshtml"/>
+        <None Include="Views/Bet/Details.cshtml"/>
+        <None Include="Views/Bet/Edit.cshtml"/>
+        <None Include="Views/Bet/Index.cshtml"/>
+        <None Include="Views/Home/Index.cshtml"/>
+        <None Include="Views/Job/Create.cshtml"/>
+        <None Include="Views/Job/Delete.cshtml"/>
+        <None Include="Views/Job/Details.cshtml"/>
+        <None Include="Views/Job/Edit.cshtml"/>
+        <None Include="Views/Job/Index.cshtml"/>
+        <None Include="Views/Placement/Create.cshtml"/>
+        <None Include="Views/Placement/Delete.cshtml"/>
+        <None Include="Views/Placement/Details.cshtml"/>
+        <None Include="Views/Placement/Edit.cshtml"/>
+        <None Include="Views/Placement/Index.cshtml"/>
+        <None Include="Views/Shared/Error.cshtml"/>
+        <None Include="Views/Shared/_Layout.cshtml"/>
+        <None Include="Views/Shared/_LoginLayout.cshtml"/>
+        <None Include="Views/Shared/_LoginPartial.cshtml"/>
+        <None Include="Views/Shared/_ValidationScriptsPartial.cshtml"/>
+        <None Include="Views/User_temp/Create.cshtml"/>
+        <None Include="Views\User\Index.cshtml"/>
+        <None Include="Views\User\Login.cshtml"/>
+        <None Include="Views\User\Login.cshtml.cs"/>
+        <None Include="Views/_ViewImports.cshtml"/>
+        <None Include="Views/_ViewStart.cshtml"/>
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="Views\AchievedAchievements\Details.cshtml" />
       <None Remove="Views\Bet\History.cshtml" />
       <None Remove="Views\Home\Contact.cshtml" />
-      <None Remove="Views\User\Edit.cshtml" />
     </ItemGroup>
     
     <ItemGroup>

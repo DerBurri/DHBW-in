@@ -26,7 +26,7 @@ namespace DHB_Win.Controllers
             return View("Areas/Identity/Pages/Account/Login.cshtml");
         }
 
-        [HttpPost, ActionName("User")]
+        [HttpPost]
         [AllowAnonymous]
         // GET: User
         public async Task<IActionResult> Index()
