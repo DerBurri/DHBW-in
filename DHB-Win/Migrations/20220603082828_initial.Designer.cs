@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    [Migration("20220602200058_initial")]
+    [Migration("20220603082828_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -268,29 +268,6 @@ namespace DHB_Win.Migrations
                     b.ToTable("Placement", "dhbwin");
                 });
 
-            modelBuilder.Entity("DHB_Win.Models.Plz", b =>
-                {
-                    b.Property<string>("Plz1")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("PLZ");
-
-                    b.Property<string>("Ort")
-                        .HasMaxLength(30)
-                        .IsUnicode(false)
-                        .HasColumnType("char(30)")
-                        .IsFixedLength();
-
-                    b.HasKey("Plz1")
-                        .HasName("PLZ_pk");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Plz1"), false);
-
-                    b.HasIndex(new[] { "Plz1" }, "PLZ_PLZ_uindex")
-                        .IsUnique();
-
-                    b.ToTable("PLZ", "dhbwin");
-                });
-
             modelBuilder.Entity("DHB_Win.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -311,7 +288,6 @@ namespace DHB_Win.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Firstname")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .IsUnicode(false)
                         .HasColumnType("char(25)")
@@ -324,7 +300,6 @@ namespace DHB_Win.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .IsUnicode(false)
                         .HasColumnType("char(25)")
@@ -350,16 +325,22 @@ namespace DHB_Win.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PlzFk")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("PLZ_fk");
+                    b.Property<string>("Plz")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("char(10)")
+                        .IsFixedLength();
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Stadt")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("char(100)")
+                        .IsFixedLength();
+
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasMaxLength(25)
                         .IsUnicode(false)
                         .HasColumnType("char(25)")
@@ -381,8 +362,6 @@ namespace DHB_Win.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("PlzFk");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -608,18 +587,6 @@ namespace DHB_Win.Migrations
                     b.Navigation("UidFkNavigation");
                 });
 
-            modelBuilder.Entity("DHB_Win.Models.User", b =>
-                {
-                    b.HasOne("DHB_Win.Models.Plz", "PlzFkNavigation")
-                        .WithMany("Users")
-                        .HasForeignKey("PlzFk")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("PLZ_fk");
-
-                    b.Navigation("PlzFkNavigation");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -687,11 +654,6 @@ namespace DHB_Win.Migrations
             modelBuilder.Entity("DHB_Win.Models.BetOption", b =>
                 {
                     b.Navigation("Placements");
-                });
-
-            modelBuilder.Entity("DHB_Win.Models.Plz", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DHB_Win.Models.User", b =>

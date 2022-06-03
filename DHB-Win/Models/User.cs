@@ -6,6 +6,17 @@ namespace DHB_Win.Models
 {
     public partial class User : IdentityUser
     {
+        public int? ExpPoints;
+
+        [PersonalData] public string? Firstname;
+        [PersonalData] public string? Name;
+        [PersonalData] public string? Plz;
+        [PersonalData] public string? Profilepicture;
+        [PersonalData] public string? Stadt;
+        [PersonalData] public string? Street;
+
+        public int? WalletBalance;
+
         public User()
         {
             AchievedAchievements = new HashSet<AchievedAchievement>();
@@ -15,18 +26,7 @@ namespace DHB_Win.Models
             Placements = new HashSet<Placement>();
         }
 
-        [PersonalData] public string? Firstname;
-        [PersonalData] public string? Name;
-        [PersonalData] public string? Street;
-        [PersonalData] public string? Profilepicture;
 
-        public int? WalletBalance;
-
-        public int? ExpPoints;
-
-
-        [Display(Name = "Postleitzahl")] public string PlzFk;
-        public virtual Plz? PlzFkNavigation { get; set; }
         public virtual ICollection<AchievedAchievement>? AchievedAchievements { get; set; }
         public virtual ICollection<Bet>? Bets { get; set; }
         public virtual ICollection<Job>? JobProviders { get; set; }

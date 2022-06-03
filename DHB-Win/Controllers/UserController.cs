@@ -31,7 +31,7 @@ namespace DHB_Win.Controllers
         // GET: User
         public async Task<IActionResult> Index()
         {
-            var dhbwinContext = _context.Users.Include(u => u.PlzFkNavigation);
+            var dhbwinContext = _context.Users;
             return View(await dhbwinContext.ToListAsync());
         }
 
@@ -44,7 +44,6 @@ namespace DHB_Win.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.PlzFkNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
@@ -57,7 +56,6 @@ namespace DHB_Win.Controllers
         // GET: User/Create
         public IActionResult Create()
         {
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1");
             return View();
         }
 
@@ -77,7 +75,6 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
@@ -95,7 +92,6 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
@@ -135,7 +131,6 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
@@ -148,7 +143,6 @@ namespace DHB_Win.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.PlzFkNavigation)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {

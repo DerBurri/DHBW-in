@@ -21,7 +21,6 @@ namespace DHB_Win.Data
         public virtual DbSet<BetOption> BetOptions { get; set; } = null!;
         public virtual DbSet<Job> Jobs { get; set; } = null!;
         public virtual DbSet<Placement> Placements { get; set; } = null!;
-        public virtual DbSet<Plz> Plzs { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -236,26 +235,6 @@ namespace DHB_Win.Data
                     .HasConstraintName("User_fk");
             });
 
-            modelBuilder.Entity<Plz>(entity =>
-            {
-                entity.HasKey(e => e.Plz1)
-                    .HasName("PLZ_pk")
-                    .IsClustered(false);
-
-                entity.ToTable("PLZ", "dhbwin");
-
-                entity.HasIndex(e => e.Plz1, "PLZ_PLZ_uindex")
-                    .IsUnique();
-
-                entity.Property(e => e.Plz1)
-                    .ValueGeneratedNever()
-                    .HasColumnName("PLZ");
-
-                entity.Property(e => e.Ort)
-                    .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .IsFixedLength();
-            });
 
             modelBuilder.Entity<User>(entity =>
             {
@@ -275,17 +254,20 @@ namespace DHB_Win.Data
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.PlzFk).HasColumnName("PLZ_fk");
-
                 entity.Property(e => e.Street)
                     .HasMaxLength(25)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.HasOne(d => d.PlzFkNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.PlzFk)
-                    .HasConstraintName("PLZ_fk");
+                entity.Property(e => e.Plz)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Stadt)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
             base.OnModelCreating(modelBuilder);
 

@@ -44,17 +44,33 @@ namespace DHB_Win.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PLZ",
-                schema: "dhbwin",
+                name: "AspNetUsers",
                 columns: table => new
                 {
-                    PLZ = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Ort = table.Column<string>(type: "char(30)", unicode: false, fixedLength: true, maxLength: 30, nullable: true)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Firstname = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: true),
+                    Name = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: true),
+                    Plz = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: true),
+                    Stadt = table.Column<string>(type: "char(100)", unicode: false, fixedLength: true, maxLength: 100, nullable: true),
+                    Street = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "char(500)", unicode: false, fixedLength: true, maxLength: 500, nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PLZ_pk", x => x.PLZ)
-                        .Annotation("SqlServer:Clustered", false);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,42 +91,6 @@ namespace DHB_Win.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PLZ_fk = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Firstname = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: false),
-                    Name = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: false),
-                    Street = table.Column<string>(type: "char(25)", unicode: false, fixedLength: true, maxLength: 25, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "char(500)", unicode: false, fixedLength: true, maxLength: 500, nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "PLZ_fk",
-                        column: x => x.PLZ_fk,
-                        principalSchema: "dhbwin",
-                        principalTable: "PLZ",
-                        principalColumn: "PLZ",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -391,11 +371,6 @@ namespace DHB_Win.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_PLZ_fk",
-                table: "AspNetUsers",
-                column: "PLZ_fk");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -458,13 +433,6 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 table: "Placement",
                 column: "OptionID_fk");
-
-            migrationBuilder.CreateIndex(
-                name: "PLZ_PLZ_uindex",
-                schema: "dhbwin",
-                table: "PLZ",
-                column: "PLZ",
-                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -513,10 +481,6 @@ namespace DHB_Win.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "PLZ",
-                schema: "dhbwin");
         }
     }
 }

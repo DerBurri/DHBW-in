@@ -27,6 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Migrations"/>
         <Folder Include="sql" />
     </ItemGroup>
 
@@ -2140,16 +2141,16 @@
         <_ContentIncludedByDefault Remove="Views\Placement\Details.cshtml" />
         <_ContentIncludedByDefault Remove="Views\Placement\Edit.cshtml" />
         <_ContentIncludedByDefault Remove="Views\Placement\Index.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Job\Create.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Job\Delete.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Job\Details.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Job\Edit.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Job\Index.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Bet\Create.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Bet\Delete.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Bet\Details.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Bet\Edit.cshtml" />
-        <_ContentIncludedByDefault Remove="Views\Bet\Index.cshtml" />
+        <_ContentIncludedByDefault Remove="Views\Job\Create.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Job\Delete.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Job\Details.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Job\Edit.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Job\Index.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Bet\Create.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Bet\Delete.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Bet\Details.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Bet\Edit.cshtml"/>
+        <_ContentIncludedByDefault Remove="Views\Bet\Index.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\Achievement\Create.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\Achievement\Delete.cshtml"/>
         <_ContentIncludedByDefault Remove="Views\Achievement\Details.cshtml"/>
