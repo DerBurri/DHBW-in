@@ -1,10 +1,19 @@
+@using Microsoft.AspNetCore.Authorization
 @model IEnumerable<DHB_Win.Models.AchievedAchievement>
+
+@inject IAuthorizationService AuthorizationService
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var isAdministratorResult = await AuthorizationService.AuthorizeAsync(User, "isAdministrator");
 }
-
+@if (isAdministratorResult.Succeeded)
+{
+    <h1>
+        <a asp-action="Create" asp-controller="Achievement" class="btn btn-sm btn-info float-left">Achievement Erstellen</a>
+    </h1>
+}
 <h1>Achievements</h1>
 <p>
     <a asp-action="Details" class="btn btn-sm btn-info float-left">Alle Achievements ansehen</a>

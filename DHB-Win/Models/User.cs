@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace DHB_Win.Models
@@ -11,7 +10,7 @@ namespace DHB_Win.Models
         [PersonalData] public string? Firstname;
         [PersonalData] public string? Name;
         [PersonalData] public string? Plz;
-        [PersonalData] public string? Profilepicture;
+        [PersonalData] public byte? Profilepicture;
         [PersonalData] public string? Stadt;
         [PersonalData] public string? Street;
 

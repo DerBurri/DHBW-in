@@ -68,6 +68,11 @@ namespace DHB_Win.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Text)]
+            [Display(Name = "Plz")]
+            public string Plz { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
             [Display(Name = "Street")]
             public string Street { get; set; }
 
@@ -89,7 +94,8 @@ namespace DHB_Win.Areas.Identity.Pages.Account.Manage
                 Name = user.Name,
                 Street = user.Street,
                 Firstname = user.Firstname,
-                Profilepicture = user.Profilepicture,
+                //Profilepicture = user.Profilepicture,
+                Plz = user.Plz,
                 PhoneNumber = phoneNumber
             };
         }
@@ -146,10 +152,11 @@ namespace DHB_Win.Areas.Identity.Pages.Account.Manage
                 user.Firstname = Input.Firstname;
             }
 
-            if (Input.Profilepicture != user.Profilepicture)
+            /*if (Input.Profilepicture != user.Profilepicture)
             {
                 user.Profilepicture = Input.Profilepicture;
             }
+            */
 
 
             await _signInManager.RefreshSignInAsync(user);
