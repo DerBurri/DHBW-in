@@ -6,26 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace DHB_Win.Controllers
+namespace DHB_Win.Views
 {
-    public class BetController : Controller
+    public class Test : Controller
     {
         private readonly dhbwinContext _context;
 
-        public BetController(dhbwinContext context)
+        public Test(dhbwinContext context)
         {
             _context = context;
         }
 
-        // GET: Bet
+        // GET: Test
         public async Task<IActionResult> Index()
         {
             var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
             return View(await dhbwinContext.ToListAsync());
         }
 
-        // GET: Bet/Details/5
-        public async Task<IActionResult> Details(string? id)
+        // GET: Test/Details/5
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -43,29 +43,20 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
-        // GET: Bet/Create
+        // GET: Test/Create
         public IActionResult Create()
         {
-            if (User.IsInRole("Administrator"))
-            {
-                ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id", Bet.);
-            }
-            else
-            {
-                ViewData["UidFk2"] = new SelectList(_context.Users, "Nachname", "Nachname");
-            }
-
+            ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Bet/Create
+        // POST: Test/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")]
-            Bet bet)
+            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (ModelState.IsValid)
             {
@@ -78,8 +69,8 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
-        // GET: Bet/Edit/5
-        public async Task<IActionResult> Edit(string? id)
+        // GET: Test/Edit/5
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -92,18 +83,17 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
+            ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id", bet.UidFk2);
             return View(bet);
         }
 
-        // POST: Bet/Edit/5
+        // POST: Test/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id,
-            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")]
-            Bet bet)
+            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (id != bet.BetId)
             {
@@ -132,19 +122,12 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
+            ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id", bet.UidFk2);
             return View(bet);
         }
 
-        public async Task<IActionResult> History()
-        {
-            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dhbwinContext.ToListAsync());
-        }
-
-
-        // GET: Bet/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        // GET: Test/Delete/5
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -162,7 +145,7 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
-        // POST: Bet/Delete/5
+        // POST: Test/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
