@@ -2,8 +2,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace DHB_Win.Controllers
@@ -11,21 +11,24 @@ namespace DHB_Win.Controllers
     public class BetController : Controller
     {
         private readonly dhbwinContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public BetController(dhbwinContext context)
+        public BetController(dhbwinContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Bet
         public async Task<IActionResult> Index()
         {
-            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dhbwinContext.ToListAsync());
+            return _context.Bets != null
+                ? View(await _context.Bets.ToListAsync())
+                : Problem("Entity set 'dhbwinContext.Bets'  is null.");
         }
 
         // GET: Bet/Details/5
-        public async Task<IActionResult> Details(string? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -33,7 +36,6 @@ namespace DHB_Win.Controllers
             }
 
             var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
                 .FirstOrDefaultAsync(m => m.BetId == id);
             if (bet == null)
             {
@@ -46,15 +48,6 @@ namespace DHB_Win.Controllers
         // GET: Bet/Create
         public IActionResult Create()
         {
-            if (User.IsInRole("Administrator"))
-            {
-                ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id", Bet.);
-            }
-            else
-            {
-                ViewData["UidFk2"] = new SelectList(_context.Users, "Nachname", "Nachname");
-            }
-
             return View();
         }
 
@@ -63,23 +56,21 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(
-            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")]
-            Bet bet)
+        public async Task<IActionResult> Create([Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (ModelState.IsValid)
             {
+                bet.Users = await _userManager.GetUserAsync(HttpContext.User);
                 _context.Add(bet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Id", "Id", bet.UidFk2);
             return View(bet);
         }
 
         // GET: Bet/Edit/5
-        public async Task<IActionResult> Edit(string? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -92,7 +83,6 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
             return View(bet);
         }
 
@@ -101,9 +91,8 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,
-            [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")]
-            Bet bet)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
             if (id != bet.BetId)
             {
@@ -132,19 +121,11 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
             return View(bet);
         }
 
-        public async Task<IActionResult> History()
-        {
-            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dhbwinContext.ToListAsync());
-        }
-
-
         // GET: Bet/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Bets == null)
             {
@@ -152,7 +133,6 @@ namespace DHB_Win.Controllers
             }
 
             var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
                 .FirstOrDefaultAsync(m => m.BetId == id);
             if (bet == null)
             {
@@ -165,7 +145,7 @@ namespace DHB_Win.Controllers
         // POST: Bet/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Bets == null)
             {
@@ -182,7 +162,7 @@ namespace DHB_Win.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BetExists(string id)
+        private bool BetExists(int id)
         {
             return (_context.Bets?.Any(e => e.BetId == id)).GetValueOrDefault();
         }
