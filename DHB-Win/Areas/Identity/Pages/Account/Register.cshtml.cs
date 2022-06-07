@@ -79,7 +79,13 @@ namespace DHB_Win.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-
+                user.Stadt = Input.Stadt;
+                user.Firstname = Input.Firstname;
+                user.Name = Input.Name;
+                user.Plz = Input.Plz;
+                user.Stadt = Input.Stadt;
+                user.Street = Input.Street;
+                
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
