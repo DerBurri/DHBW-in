@@ -27,8 +27,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Migrations"/>
         <Folder Include="sql" />
+        <Folder Include="temp"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -41,11 +41,6 @@
         <None Include="Views/Achievement/Details.cshtml"/>
         <None Include="Views/Achievement/Edit.cshtml"/>
         <None Include="Views/Achievement/Index.cshtml"/>
-        <None Include="Views/Bet/Create.cshtml"/>
-        <None Include="Views/Bet/Delete.cshtml"/>
-        <None Include="Views/Bet/Details.cshtml"/>
-        <None Include="Views/Bet/Edit.cshtml"/>
-        <None Include="Views/Bet/Index.cshtml"/>
         <None Include="Views/Home/Index.cshtml"/>
         <None Include="Views/Job/Create.cshtml"/>
         <None Include="Views/Job/Delete.cshtml"/>
@@ -2111,16 +2106,16 @@
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\credit\visa.png" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\default-150x150.png" />
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\icons.png" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo1.png" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo2.png" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo3.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo4.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-1.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg" />
-        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo1.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo2.png"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo3.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\photo4.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-1.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-2.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-3.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-4.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\prod-5.jpg"/>
+        <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user1-128x128.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user2-160x160.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user3-128x128.jpg"/>
         <_ContentIncludedByDefault Remove="wwwroot\dhbwin\dist\img\user4-128x128.jpg"/>
@@ -2182,11 +2177,16 @@
     </ItemGroup>
 
     <ItemGroup>
-        <UpToDateCheckInput Remove="Views\Job\Create.cshtml" />
-        <UpToDateCheckInput Remove="Views\Job\Delete.cshtml" />
-        <UpToDateCheckInput Remove="Views\Job\Details.cshtml" />
-        <UpToDateCheckInput Remove="Views\Job\Edit.cshtml" />
-        <UpToDateCheckInput Remove="Views\Job\Index.cshtml" />
+        <UpToDateCheckInput Remove="Views\Job\Create.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Delete.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Details.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Edit.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Job\Index.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Test\Create.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Test\Delete.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Test\Details.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Test\Edit.cshtml"/>
+        <UpToDateCheckInput Remove="Views\Test\Index.cshtml"/>
     </ItemGroup>
 
 

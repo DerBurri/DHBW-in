@@ -2,7 +2,7 @@
 {
     public partial class Achievement
     {
-        public string AchId { get; set; }
+        public int AchId { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
         public int? ExpPoints { get; set; }

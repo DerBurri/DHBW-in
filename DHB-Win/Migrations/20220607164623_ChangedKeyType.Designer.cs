@@ -4,6 +4,7 @@ using DHB_Win.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    partial class dhbwinContextModelSnapshot : ModelSnapshot
+    [Migration("20220607164623_ChangedKeyType")]
+    partial class ChangedKeyType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,16 +126,17 @@ namespace DHB_Win.Migrations
                         .HasColumnType("char(50)")
                         .IsFixedLength();
 
-                    b.Property<string>("UsersId")
+                    b.Property<string>("UidFk2")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("UID_fk2");
 
                     b.HasKey("BetId")
                         .HasName("Bet_pk");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("BetId"), false);
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UidFk2");
 
                     b.HasIndex(new[] { "BetId" }, "Bet_BetID_uindex")
                         .IsUnique();
@@ -530,14 +533,14 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Bet", b =>
                 {
-                    b.HasOne("DHB_Win.Models.User", "Users")
+                    b.HasOne("DHB_Win.Models.User", "UidFk2Navigation")
                         .WithMany("Bets")
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UidFk2")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("UID_fk2");
 
-                    b.Navigation("Users");
+                    b.Navigation("UidFk2Navigation");
                 });
 
             modelBuilder.Entity("DHB_Win.Models.BetOption", b =>

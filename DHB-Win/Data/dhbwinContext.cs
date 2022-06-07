@@ -93,11 +93,12 @@ namespace DHB_Win.Data
 
             modelBuilder.Entity<Bet>(entity =>
             {
+                entity.ToTable("Bet", "dhbwin");
+
                 entity.HasKey(e => e.BetId)
                     .HasName("Bet_pk")
                     .IsClustered(false);
 
-                entity.ToTable("Bet", "dhbwin");
 
                 entity.HasIndex(e => e.BetId, "Bet_BetID_uindex")
                     .IsUnique();
@@ -116,12 +117,12 @@ namespace DHB_Win.Data
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.UidFk2).HasColumnName("UID_fk2");
-
-                entity.HasOne(d => d.UidFk2Navigation)
+                entity.HasOne(d => d.Users)
                     .WithMany(p => p.Bets)
-                    .HasForeignKey(d => d.UidFk2)
                     .HasConstraintName("UID_fk2");
+
+                entity.Navigation(b => b.Users)
+                    .UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
             modelBuilder.Entity<BetOption>(entity =>

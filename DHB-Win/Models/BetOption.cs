@@ -9,8 +9,8 @@ namespace DHB_Win.Models
             Placements = new HashSet<Placement>();
         }
 
-        public string OptionsId { get; set; }
-        public string? BetId { get; set; }
+        public int OptionsId { get; set; }
+        public int? BetId { get; set; }
         public string? Title { get; set; }
         public string? Descpription { get; set; }
         public int? QuoteValue { get; set; }

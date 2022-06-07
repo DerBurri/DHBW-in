@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    [Migration("20220603082828_initial")]
-    partial class initial
+    [Migration("20220607170053_changed")]
+    partial class changed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,14 +26,13 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.AchievedAchievement", b =>
                 {
-                    b.Property<string>("Aaid")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("Aaid")
+                        .HasColumnType("int")
                         .HasColumnName("AAID");
 
-                    b.Property<string>("AchIdFk")
-                        .IsRequired()
+                    b.Property<int>("AchIdFk")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("int")
                         .HasColumnName("AchID_fk");
 
                     b.Property<DateTime?>("CreationDate")
@@ -57,9 +56,12 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Achievement", b =>
                 {
-                    b.Property<string>("AchId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("AchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("AchID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AchId"), 1L, 1);
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -92,9 +94,12 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Bet", b =>
                 {
-                    b.Property<string>("BetId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("BetId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("BetID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BetId"), 1L, 1);
 
                     b.Property<DateTime?>("CreationDate")
                         .HasColumnType("datetime");
@@ -141,12 +146,15 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.BetOption", b =>
                 {
-                    b.Property<string>("OptionsId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("OptionsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("OptionsID");
 
-                    b.Property<string>("BetId")
-                        .HasColumnType("nvarchar(450)")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OptionsId"), 1L, 1);
+
+                    b.Property<int?>("BetId")
+                        .HasColumnType("int")
                         .HasColumnName("BetID");
 
                     b.Property<string>("Descpription")
@@ -179,9 +187,12 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Job", b =>
                 {
-                    b.Property<string>("JobId")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int>("JobId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasColumnName("JobID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobId"), 1L, 1);
 
                     b.Property<DateTime?>("CreationDate")
                         .IsRequired()
@@ -243,17 +254,19 @@ namespace DHB_Win.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("UID_fk");
 
-                    b.Property<string>("PlacementId")
+                    b.Property<int>("PlacementId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("int")
                         .HasColumnName("PlacementID");
 
-                    b.Property<string>("BetIdFk")
-                        .HasColumnType("nvarchar(450)")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlacementId"), 1L, 1);
+
+                    b.Property<int>("BetIdFk")
+                        .HasColumnType("int")
                         .HasColumnName("BetID_fk");
 
-                    b.Property<string>("OptionIdFk")
-                        .HasColumnType("nvarchar(450)")
+                    b.Property<int?>("OptionIdFk")
+                        .HasColumnType("int")
                         .HasColumnName("OptionID_fk");
 
                     b.HasKey("UidFk", "PlacementId", "BetIdFk")
@@ -446,12 +459,10 @@ namespace DHB_Win.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -488,12 +499,10 @@ namespace DHB_Win.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

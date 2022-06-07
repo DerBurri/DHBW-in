@@ -2,10 +2,10 @@
 {
     public partial class Placement
     {
-        public string PlacementId { get; set; }
-        public string BetIdFk { get; set; }
+        public int PlacementId { get; set; }
+        public int BetIdFk { get; set; }
         public string UidFk { get; set; }
-        public string? OptionIdFk { get; set; }
+        public int? OptionIdFk { get; set; }
 
         public virtual Bet BetIdFkNavigation { get; set; } = null!;
         public virtual BetOption? OptionIdFkNavigation { get; set; }

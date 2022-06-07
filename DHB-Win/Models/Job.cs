@@ -8,7 +8,7 @@ namespace DHB_Win.Models
     /// </summary>
     public partial class Job
     {
-        [Display(Name = "Job ID")] public string JobId { get; set; }
+        [Display(Name = "Job ID")] public int JobId { get; set; }
 
         [Display(Name = "Anbieter ID")] public string? ProviderId { get; set; }
 

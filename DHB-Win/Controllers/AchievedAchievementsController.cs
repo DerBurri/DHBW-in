@@ -89,7 +89,7 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,
+        public async Task<IActionResult> Edit(int id,
             [Bind("UidFk,AchIdFk,CreationDate,Aaid")]
             AchievedAchievement achievedAchievement)
         {
@@ -126,7 +126,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: AchievedAchievements/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.AchievedAchievements == null)
             {
@@ -165,7 +165,7 @@ namespace DHB_Win.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AchievedAchievementExists(string id)
+        private bool AchievedAchievementExists(int id)
         {
             return (_context.AchievedAchievements?.Any(e => e.Aaid == id)).GetValueOrDefault();
         }

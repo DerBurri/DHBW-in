@@ -4,6 +4,7 @@ using DHB_Win.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    partial class dhbwinContextModelSnapshot : ModelSnapshot
+    [Migration("20220607185643_foreignkey2")]
+    partial class foreignkey2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,8 +126,11 @@ namespace DHB_Win.Migrations
                         .HasColumnType("char(50)")
                         .IsFixedLength();
 
-                    b.Property<string>("UsersId")
+                    b.Property<string>("UserForeignKey")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BetId")
@@ -532,10 +537,7 @@ namespace DHB_Win.Migrations
                 {
                     b.HasOne("DHB_Win.Models.User", "Users")
                         .WithMany("Bets")
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("UID_fk2");
+                        .HasForeignKey("UsersId");
 
                     b.Navigation("Users");
                 });

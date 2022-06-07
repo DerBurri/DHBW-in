@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DHB_Win.Migrations
 {
-    public partial class initial : Migration
+    public partial class ChangedKeyType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,8 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    AchID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AchID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "char(100)", unicode: false, fixedLength: true, maxLength: 100, nullable: true),
                     Description = table.Column<string>(type: "char(500)", unicode: false, fixedLength: true, maxLength: 500, nullable: true),
                     ExpPoints = table.Column<int>(type: "int", nullable: true),
@@ -99,9 +100,9 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    AAID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AAID = table.Column<int>(type: "int", nullable: false),
                     UID_fk = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AchID_fk = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    AchID_fk = table.Column<int>(type: "int", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime", nullable: true)
                 },
                 constraints: table =>
@@ -145,8 +146,8 @@ namespace DHB_Win.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -190,8 +191,8 @@ namespace DHB_Win.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -210,7 +211,8 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    BetID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BetID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UID_fk2 = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Title = table.Column<string>(type: "char(50)", unicode: false, fixedLength: true, maxLength: 50, nullable: false),
                     ExpPoints = table.Column<int>(type: "int", nullable: false),
@@ -235,7 +237,8 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    JobID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JobID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     ProviderID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     WorkerID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Title = table.Column<string>(type: "char(50)", unicode: false, fixedLength: true, maxLength: 50, nullable: false),
@@ -267,8 +270,9 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    OptionsID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    BetID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    OptionsID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BetID = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "char(50)", unicode: false, fixedLength: true, maxLength: 50, nullable: true),
                     Descpription = table.Column<string>(type: "char(500)", unicode: false, fixedLength: true, maxLength: 500, nullable: true),
                     QuoteValue = table.Column<int>(type: "int", nullable: true)
@@ -290,10 +294,11 @@ namespace DHB_Win.Migrations
                 schema: "dhbwin",
                 columns: table => new
                 {
-                    PlacementID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    BetID_fk = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PlacementID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BetID_fk = table.Column<int>(type: "int", nullable: false),
                     UID_fk = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OptionID_fk = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    OptionID_fk = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

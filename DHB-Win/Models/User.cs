@@ -27,7 +27,8 @@ namespace DHB_Win.Models
 
 
         public virtual ICollection<AchievedAchievement>? AchievedAchievements { get; set; }
-        public virtual ICollection<Bet>? Bets { get; set; }
+
+        public virtual ICollection<Bet> Bets { get; set; }
         public virtual ICollection<Job>? JobProviders { get; set; }
         public virtual ICollection<Job>? JobWorkers { get; set; }
         public virtual ICollection<Placement>? Placements { get; set; }
