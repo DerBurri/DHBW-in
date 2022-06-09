@@ -99,7 +99,6 @@ namespace DHB_Win.Data
                     .HasName("Bet_pk")
                     .IsClustered(false);
 
-
                 entity.HasIndex(e => e.BetId, "Bet_BetID_uindex")
                     .IsUnique();
 
@@ -117,11 +116,14 @@ namespace DHB_Win.Data
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.HasOne(d => d.Users)
+                entity.Property<string>("UserForeignKey");
+
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Bets)
+                    .HasForeignKey("UserForeignKey")
                     .HasConstraintName("UID_fk2");
 
-                entity.Navigation(b => b.Users)
+                entity.Navigation(b => b.User)
                     .UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 

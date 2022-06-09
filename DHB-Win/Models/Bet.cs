@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DHB_Win.Models
 {
@@ -37,7 +38,7 @@ namespace DHB_Win.Models
 
         [Display(Name = "Datum")] public DateTime? CreationDate { get; set; }
 
-        public virtual User? Users { get; set; }
+        [InverseProperty("Bets")] public virtual User User { get; set; }
         public virtual ICollection<BetOption>? BetOptions { get; set; }
         public virtual ICollection<Placement>? Placements { get; set; }
     }

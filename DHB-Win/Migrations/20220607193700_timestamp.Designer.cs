@@ -4,6 +4,7 @@ using DHB_Win.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    partial class dhbwinContextModelSnapshot : ModelSnapshot
+    [Migration("20220607193700_timestamp")]
+    partial class timestamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,6 +102,8 @@ namespace DHB_Win.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BetId"), 1L, 1);
 
                     b.Property<DateTime?>("CreationDate")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime");
 
                     b.Property<string>("Description")
@@ -124,7 +128,7 @@ namespace DHB_Win.Migrations
                         .HasColumnType("char(50)")
                         .IsFixedLength();
 
-                    b.Property<string>("UserForeignKey")
+                    b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BetId")
@@ -132,7 +136,7 @@ namespace DHB_Win.Migrations
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("BetId"), false);
 
-                    b.HasIndex("UserForeignKey");
+                    b.HasIndex("UsersId");
 
                     b.HasIndex(new[] { "BetId" }, "Bet_BetID_uindex")
                         .IsUnique();
@@ -529,12 +533,12 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Bet", b =>
                 {
-                    b.HasOne("DHB_Win.Models.User", "User")
+                    b.HasOne("DHB_Win.Models.User", "Users")
                         .WithMany("Bets")
-                        .HasForeignKey("UserForeignKey")
+                        .HasForeignKey("UsersId")
                         .HasConstraintName("UID_fk2");
 
-                    b.Navigation("User");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DHB_Win.Models.BetOption", b =>

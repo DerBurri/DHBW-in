@@ -1,16 +1,27 @@
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using DHB_Win.Models
 @model IEnumerable<DHB_Win.Models.Bet>
+
+@inject IAuthorizationService AuthorizationService
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Wetten</h1>
 
+<h2>Meine Wetten</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-sm btn-info float-left">Neue Wette erstellen</a>
+    <br>
 </p>
-<table class="table">
+<table class="table table-striped projects">
     <thead>
     <tr>
         <th>
@@ -28,32 +39,59 @@
         <th>
             @Html.DisplayNameFor(model => model.CreationDate)
         </th>
-        <th></th>
+        <th>Optionen</th>
+
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+
+    @foreach (var item in Model.Select(x => x).Where(x => x.User == UserManager.GetUserAsync(User).Result))
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
+            <td class="project-state">
+                <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+            </td>
+
+            <td class="project_progress">
+                <div class="progress progress-sm">
+                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+                    </div>
+                </div>
+                <small>
+                    @Html.DisplayFor(modelItem => item.Reward) Betcoins
+                </small>
+            </td>
+
             <td>
-                @Html.DisplayFor(modelItem => item.ExpPoints)
+                <a>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </a>
+                <br>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Reward)
+                <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BetId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BetId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BetId">Delete</a>
+
+
+            <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.BetId">
+                    <i class="fas fa-folder">
+                    </i>
+                    Details
+                </a>
+                <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.BetId">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Bearbeiten
+                </a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.BetId">
+                    <i class="fas fa-trash">
+                    </i>
+                    L�schen
+                </a>
             </td>
         </tr>
     }

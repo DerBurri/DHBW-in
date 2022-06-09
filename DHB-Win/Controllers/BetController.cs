@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using DHB_Win.Data;
@@ -23,7 +24,7 @@ namespace DHB_Win.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Bets != null
-                ? View(await _context.Bets.ToListAsync())
+                ? View(await _context.Bets.Include(u => u.User).ToListAsync())
                 : Problem("Entity set 'dhbwinContext.Bets'  is null.");
         }
 
@@ -51,6 +52,7 @@ namespace DHB_Win.Controllers
             return View();
         }
 
+
         // POST: Bet/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -60,7 +62,8 @@ namespace DHB_Win.Controllers
         {
             if (ModelState.IsValid)
             {
-                bet.Users = await _userManager.GetUserAsync(HttpContext.User);
+                bet.User = await _userManager.GetUserAsync(HttpContext.User);
+                bet.CreationDate = DateTime.UtcNow;
                 _context.Add(bet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +95,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
+            [Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")]
+            Bet bet)
         {
             if (id != bet.BetId)
             {
