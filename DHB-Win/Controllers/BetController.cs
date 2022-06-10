@@ -60,10 +60,12 @@ namespace DHB_Win.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
+            bet.User = await _userManager.GetUserAsync(HttpContext.User);
+            bet.CreationDate = DateTime.UtcNow;
+            ModelState.Clear();
+            TryValidateModel(bet);
             if (ModelState.IsValid)
             {
-                bet.User = await _userManager.GetUserAsync(HttpContext.User);
-                bet.CreationDate = DateTime.UtcNow;
                 _context.Add(bet);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

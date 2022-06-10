@@ -57,7 +57,8 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Where(e => e.WorkerId == User.FindFirstValue(ClaimTypes.NameIdentifier)))
+
+    @foreach (var item in Model.Where(e => e.Worker?.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)))
     {
         <tr>
             <td>
@@ -72,7 +73,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider.Id) @*Profilbild und Username*@
+                @Html.DisplayFor(modelItem => item.Provider.Name) @*Profilbild und Username*@
             </td>
             <td class="project-state">
                 <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -169,7 +170,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider.Id) @*Profilbild und Username*@
+                @Html.DisplayFor(modelItem => item.Provider.Name) @*Profilbild und Username*@
             </td>
             <td class="project-state">
                 <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -249,7 +250,66 @@
     </tr>
     </thead>
     <tbody>
+    @foreach (var item in Model.Where(e => e.Provider.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+                <br>
+                <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provider.Id) @*Profilbild und Username*@
+            </td>
+            <td class="project-state">
+                <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+            </td>
+            <td class="project_progress">
+                <div class="progress progress-sm">
+                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+                    </div>
+                </div>
+                <small>
+                    @Html.DisplayFor(modelItem => item.Reward) Betcoins
+                </small>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinishDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Worker.Id)
 
+                @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
+                <span asp-validation-for="WorkerId" class="text-danger"></span>
+                irgendwie direkt die Teilnahme erm�glichen*@
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="Teilnehmen" class="btn btn-primary"/>
+            </td>
+            <td class="project-actions text-right">
+                <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.JobId">
+                    <i class="fas fa-folder">
+                    </i>
+                    Details
+                </a>
+                <a class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@item.JobId">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Bearbeiten
+                </a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.JobId">
+                    <i class="fas fa-trash">
+                    </i>
+                    L�schen
+                </a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
 

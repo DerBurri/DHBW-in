@@ -182,23 +182,19 @@ namespace DHB_Win.Data
 
                 entity.Property(e => e.FinishDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
-
                 entity.Property(e => e.Title)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.WorkerId).HasColumnName("WorkerID");
-
                 entity.HasOne(d => d.Provider)
                     .WithMany(p => p.JobProviders)
-                    .HasForeignKey(d => d.ProviderId)
+                    .HasForeignKey("ProviderID")
                     .HasConstraintName("Job_User_UID_fk");
 
                 entity.HasOne(d => d.Worker)
                     .WithMany(p => p.JobWorkers)
-                    .HasForeignKey(d => d.WorkerId)
+                    .HasForeignKey("WorkerID")
                     .HasConstraintName("Job_worker_fk");
             });
 

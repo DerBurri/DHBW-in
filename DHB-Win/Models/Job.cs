@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DHB_Win.Models
 {
@@ -8,11 +9,7 @@ namespace DHB_Win.Models
     /// </summary>
     public partial class Job
     {
-        [Display(Name = "Job ID")] public int JobId { get; set; }
-
-        [Display(Name = "Anbieter ID")] public string? ProviderId { get; set; }
-
-        [Display(Name = "Arbeiter ID")] public string? WorkerId { get; set; }
+        public int JobId { get; set; }
 
         [Display(Name = "Titel")]
         [Required(ErrorMessage = "Titel ist notwendig")]
@@ -25,7 +22,7 @@ namespace DHB_Win.Models
         [Display(Name = "Belohnung")]
         [Required(ErrorMessage = "Belohnung ist notwendig")]
         [Range(0, 100,
-            ErrorMessage = "Beohnung darf nicht über 100 sein")]
+            ErrorMessage = "Belohnung darf nicht über 100 sein")]
         public int? Reward { get; set; }
 
         [Display(Name = "Erfahrungspunkte")]
@@ -40,8 +37,12 @@ namespace DHB_Win.Models
 
         [Display(Name = "Enddatum")] public DateTime? FinishDate { get; set; }
 
-        [Display(Name = "Anbieter")] public virtual User? Provider { get; set; }
+        [Display(Name = "Anbieter")]
+        [InverseProperty("JobProviders")]
+        public virtual User Provider { get; set; }
 
-        [Display(Name = "Arbeiter")] public virtual User? Worker { get; set; }
+        [Display(Name = "Arbeiter")]
+        [InverseProperty("JobWorkers")]
+        public virtual User? Worker { get; set; }
     }
 }

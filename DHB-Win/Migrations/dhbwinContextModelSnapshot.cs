@@ -208,9 +208,8 @@ namespace DHB_Win.Migrations
                     b.Property<DateTime?>("FinishDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("ProviderId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("ProviderID");
+                    b.Property<string>("ProviderID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int?>("Reward")
                         .IsRequired()
@@ -223,18 +222,17 @@ namespace DHB_Win.Migrations
                         .HasColumnType("char(50)")
                         .IsFixedLength();
 
-                    b.Property<string>("WorkerId")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("WorkerID");
+                    b.Property<string>("WorkerID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("JobId")
                         .HasName("Job_pk");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("JobId"), false);
 
-                    b.HasIndex("ProviderId");
+                    b.HasIndex("ProviderID");
 
-                    b.HasIndex("WorkerId");
+                    b.HasIndex("WorkerID");
 
                     b.HasIndex(new[] { "JobId" }, "Job_JobID_uindex")
                         .IsUnique();
@@ -551,12 +549,12 @@ namespace DHB_Win.Migrations
                 {
                     b.HasOne("DHB_Win.Models.User", "Provider")
                         .WithMany("JobProviders")
-                        .HasForeignKey("ProviderId")
+                        .HasForeignKey("ProviderID")
                         .HasConstraintName("Job_User_UID_fk");
 
                     b.HasOne("DHB_Win.Models.User", "Worker")
                         .WithMany("JobWorkers")
-                        .HasForeignKey("WorkerId")
+                        .HasForeignKey("WorkerID")
                         .HasConstraintName("Job_worker_fk");
 
                     b.Navigation("Provider");
