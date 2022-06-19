@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DHB_Win.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DHB_Win.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;

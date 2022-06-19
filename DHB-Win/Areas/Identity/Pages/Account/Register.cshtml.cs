@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DHB_Win.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DHB_Win.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly IEmailSender _emailSender;
