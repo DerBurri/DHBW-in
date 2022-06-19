@@ -46,6 +46,13 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
+        
+        //Get History
+        public async Task<IActionResult> History()
+        {
+            return View(await _context.Bets.Include(u => u.User).Select(x => x).Where(x => x.finished).ToListAsync());
+        }
+        
         // GET: Bet/Create
         public IActionResult Create()
         {

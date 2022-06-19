@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    Html.DisplayFor(modelItem => item.UidFk2Navigation.Uid) @*Profilbild und Username hier rein?*@
+                    @Html.DisplayFor(modelItem => item.User.UserName) @*Profilbild und Username hier rein?*@
                 </td>
 
                 <td class="project-state">
@@ -149,7 +149,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    Html.DisplayFor(modelItem => item.Provider.Uid) @*Profilbild und Username*@
+                    @Html.DisplayFor(modelItem => item.Provider.UserName) @*Profilbild und Username*@
                 </td>
                 <td class="project-state">
                     <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -167,13 +167,13 @@
                     @Html.DisplayFor(modelItem => item.FinishDate)
                 </td>
                 <td>
-                    Html.DisplayFor(modelItem => item.Worker.Uid)
+                    @Html.DisplayFor(modelItem => item.Worker.UserName)
 
                     @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
                     <span asp-validation-for="WorkerId" class="text-danger"></span>
                     irgendwie direkt die Teilnahme ermöglichen*@
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="submit" value="Teilnehmen" class="btn btn-primary"/>
+                    
                 </td>
                 <td class="project-actions text-right">
                     <a class="btn btn-primary btn-sm" asp-controller="Job" asp-action="Details" asp-route-id="@item.JobId">

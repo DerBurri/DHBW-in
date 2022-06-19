@@ -4,6 +4,7 @@ using DHB_Win.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DHB_Win.Migrations
 {
     [DbContext(typeof(dhbwinContext))]
-    partial class dhbwinContextModelSnapshot : ModelSnapshot
+    [Migration("20220619151112_addsuccessfield")]
+    partial class addsuccessfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,9 +128,6 @@ namespace DHB_Win.Migrations
 
                     b.Property<string>("UserForeignKey")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("finished")
-                        .HasColumnType("bit");
 
                     b.HasKey("BetId")
                         .HasName("Bet_pk");
