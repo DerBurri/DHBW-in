@@ -11,6 +11,7 @@ create table dhbwin.Achievement
     go
 
 create unique index Achievement_AchID_uindex
-    on dhbwin.Achievement (AchID)
-    go
+    on dhbwin.Achievement (AchID) go
+
+go
 

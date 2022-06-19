@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using DHB_Win.Data;
 using DHB_Win.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DHB_Win.Controllers
 {
+    [Authorize]
     public class AchievementController : Controller
     {
         private readonly dhbwinContext _context;

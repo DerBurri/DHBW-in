@@ -1,6 +1,9 @@
+using DHB_Win.Data;
 using DHB_Win.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,9 +22,24 @@ namespace DHB_Win
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddControllersWithViews(o => o.Filters.Add(new AuthorizeFilter()));
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddDbContext<dhbwinContext>();
+            services.AddDbContext<dhbwinContext>(options => options.UseSqlServer(
+                Configuration.GetConnectionString("DHB-WinContext")));
+
+
+            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<dhbwinContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
+
+            services.AddScoped<IUserClaimsPrincipalFactory<User>, Areas.Identity.Roles.UserClaimsPrincipalFactory>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsAdministrator", policy =>
+                    policy.RequireRole("Administrator"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +69,7 @@ namespace DHB_Win
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -1,21 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DHB_Win.Data;
+using DHB_Win.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
     public class JobController : Controller
     {
+        private readonly UserManager<User> _userManager;
         private readonly dhbwinContext _context;
 
-        public JobController(dhbwinContext context)
+        public JobController(dhbwinContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Job
@@ -50,8 +53,8 @@ namespace DHB_Win.Controllers
         // GET: Job/Create
         public IActionResult Create()
         {
-            ViewData["ProviderId"] = new SelectList(_context.Users, "Uid", "Uid");
-            ViewData["WorkerId"] = new SelectList(_context.Users, "Uid", "Uid");
+            ViewData["ProviderId"] = new SelectList(_context.Users);
+            ViewData["WorkerId"] = new SelectList(_context.Users);
             return View();
         }
 
@@ -61,8 +64,13 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")] Job job)
+            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")]
+            Job job)
         {
+            job.Provider = await _userManager.GetUserAsync(HttpContext.User);
+            job.CreationDate = DateTime.UtcNow;
+            ModelState.Clear();
+            TryValidateModel(job);
             if (ModelState.IsValid)
             {
                 _context.Add(job);
@@ -70,8 +78,6 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["ProviderId"] = new SelectList(_context.Users, "Uid", "Uid", job.ProviderId);
-            ViewData["WorkerId"] = new SelectList(_context.Users, "Uid", "Uid", job.WorkerId);
             return View(job);
         }
 
@@ -89,8 +95,6 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["ProviderId"] = new SelectList(_context.Users, "Uid", "Uid", job.ProviderId);
-            ViewData["WorkerId"] = new SelectList(_context.Users, "Uid", "Uid", job.WorkerId);
             return View(job);
         }
 
@@ -100,7 +104,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")] Job job)
+            [Bind("JobId,ProviderId,WorkerId,Title,Description,Reward,ExpPoints,CreationDate,FinishDate")]
+            Job job)
         {
             if (id != job.JobId)
             {
@@ -129,8 +134,7 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["ProviderId"] = new SelectList(_context.Users, "Uid", "Uid", job.ProviderId);
-            ViewData["WorkerId"] = new SelectList(_context.Users, "Uid", "Uid", job.WorkerId);
+
             return View(job);
         }
 

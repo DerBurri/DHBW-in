@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DHB_Win.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DHB_Win.Models
+namespace DHB_Win.Data
 {
-    public partial class dhbwinContext : DbContext
+    public partial class dhbwinContext : IdentityDbContext<User>
     {
         public dhbwinContext()
         {
@@ -22,16 +21,12 @@ namespace DHB_Win.Models
         public virtual DbSet<BetOption> BetOptions { get; set; } = null!;
         public virtual DbSet<Job> Jobs { get; set; } = null!;
         public virtual DbSet<Placement> Placements { get; set; } = null!;
-        public virtual DbSet<Plz> Plzs { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(
-                    "Server=tcp:database-dhbwin.database.windows.net,1433;Initial Catalog=dhbwin;Persist Security Info=False;User ID=dbadmin;Password=admin123!;");
             }
         }
 
@@ -98,11 +93,11 @@ namespace DHB_Win.Models
 
             modelBuilder.Entity<Bet>(entity =>
             {
+                entity.ToTable("Bet", "dhbwin");
+
                 entity.HasKey(e => e.BetId)
                     .HasName("Bet_pk")
                     .IsClustered(false);
-
-                entity.ToTable("Bet", "dhbwin");
 
                 entity.HasIndex(e => e.BetId, "Bet_BetID_uindex")
                     .IsUnique();
@@ -121,12 +116,15 @@ namespace DHB_Win.Models
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.UidFk2).HasColumnName("UID_fk2");
+                entity.Property<string>("UserForeignKey");
 
-                entity.HasOne(d => d.UidFk2Navigation)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Bets)
-                    .HasForeignKey(d => d.UidFk2)
+                    .HasForeignKey("UserForeignKey")
                     .HasConstraintName("UID_fk2");
+
+                entity.Navigation(b => b.User)
+                    .UsePropertyAccessMode(PropertyAccessMode.Property);
             });
 
             modelBuilder.Entity<BetOption>(entity =>
@@ -184,23 +182,19 @@ namespace DHB_Win.Models
 
                 entity.Property(e => e.FinishDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ProviderId).HasColumnName("ProviderID");
-
                 entity.Property(e => e.Title)
                     .HasMaxLength(50)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.WorkerId).HasColumnName("WorkerID");
-
                 entity.HasOne(d => d.Provider)
                     .WithMany(p => p.JobProviders)
-                    .HasForeignKey(d => d.ProviderId)
+                    .HasForeignKey("ProviderID")
                     .HasConstraintName("Job_User_UID_fk");
 
                 entity.HasOne(d => d.Worker)
                     .WithMany(p => p.JobWorkers)
-                    .HasForeignKey(d => d.WorkerId)
+                    .HasForeignKey("WorkerID")
                     .HasConstraintName("Job_worker_fk");
             });
 
@@ -240,43 +234,10 @@ namespace DHB_Win.Models
                     .HasConstraintName("User_fk");
             });
 
-            modelBuilder.Entity<Plz>(entity =>
-            {
-                entity.HasKey(e => e.Plz1)
-                    .HasName("PLZ_pk")
-                    .IsClustered(false);
-
-                entity.ToTable("PLZ", "dhbwin");
-
-                entity.HasIndex(e => e.Plz1, "PLZ_PLZ_uindex")
-                    .IsUnique();
-
-                entity.Property(e => e.Plz1)
-                    .ValueGeneratedNever()
-                    .HasColumnName("PLZ");
-
-                entity.Property(e => e.Ort)
-                    .HasMaxLength(30)
-                    .IsUnicode(false)
-                    .IsFixedLength();
-            });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.Uid)
-                    .HasName("User_pk")
-                    .IsClustered(false);
-
                 entity.ToTable("User", "dhbwin");
-
-                entity.Property(e => e.Uid).HasColumnName("UID");
-
-                entity.Property(e => e.EMail)
-                    .HasMaxLength(50)
-                    .IsUnicode(false)
-                    .HasColumnName("E-Mail")
-                    .IsFixedLength();
-
                 entity.Property(e => e.Firstname)
                     .HasMaxLength(25)
                     .IsUnicode(false)
@@ -292,18 +253,22 @@ namespace DHB_Win.Models
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.Property(e => e.PlzFk).HasColumnName("PLZ_fk");
-
                 entity.Property(e => e.Street)
                     .HasMaxLength(25)
                     .IsUnicode(false)
                     .IsFixedLength();
 
-                entity.HasOne(d => d.PlzFkNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.PlzFk)
-                    .HasConstraintName("PLZ_fk");
+                entity.Property(e => e.Plz)
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Stadt)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .IsFixedLength();
             });
+            base.OnModelCreating(modelBuilder);
 
             OnModelCreatingPartial(modelBuilder);
         }

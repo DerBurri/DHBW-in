@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DHB_Win.Models
+﻿namespace DHB_Win.Models
 {
     public partial class Achievement
     {

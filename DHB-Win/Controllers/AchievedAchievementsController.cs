@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DHB_Win.Data;
+using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
@@ -29,7 +28,7 @@ namespace DHB_Win.Controllers
         // GET: AchievedAchievements/Details/5
         public async Task<IActionResult> Details()
         {
-            if ( _context.AchievedAchievements == null)
+            if (_context.AchievedAchievements == null)
             {
                 return NotFound();
             }
@@ -51,7 +50,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("UidFk,AchIdFk,CreationDate,Aaid")] AchievedAchievement achievedAchievement)
+            [Bind("UidFk,AchIdFk,CreationDate,Aaid")]
+            AchievedAchievement achievedAchievement)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,8 @@ namespace DHB_Win.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("UidFk,AchIdFk,CreationDate,Aaid")] AchievedAchievement achievedAchievement)
+            [Bind("UidFk,AchIdFk,CreationDate,Aaid")]
+            AchievedAchievement achievedAchievement)
         {
             if (id != achievedAchievement.Aaid)
             {

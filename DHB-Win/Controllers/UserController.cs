@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DHB_Win.Data;
+using DHB_Win.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
@@ -16,12 +17,21 @@ namespace DHB_Win.Controllers
         public UserController(dhbwinContext context)
         {
             _context = context;
+            //_userRepository = userRepository;
         }
 
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
         // GET: User
         public async Task<IActionResult> Index()
         {
-            var dhbwinContext = _context.Users.Include(u => u.PlzFkNavigation);
+            var dhbwinContext = _context.Users;
             return View(await dhbwinContext.ToListAsync());
         }
 
@@ -32,7 +42,7 @@ namespace DHB_Win.Controllers
         }
 
         // GET: User/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -40,8 +50,7 @@ namespace DHB_Win.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.PlzFkNavigation)
-                .FirstOrDefaultAsync(m => m.Uid == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -53,7 +62,6 @@ namespace DHB_Win.Controllers
         // GET: User/Create
         public IActionResult Create()
         {
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1");
             return View();
         }
 
@@ -73,12 +81,11 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
         // GET: User/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -91,7 +98,6 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
@@ -100,11 +106,11 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,
+        public async Task<IActionResult> Edit(string id,
             [Bind("Uid,Firstname,Name,EMail,Street,PlzFk,ExpPoints,PasswordHash,Walletbalance,Profilepicture")]
             User user)
         {
-            if (id != user.Uid)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -118,7 +124,7 @@ namespace DHB_Win.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Uid))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -131,12 +137,11 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["PlzFk"] = new SelectList(_context.Plzs, "Plz1", "Plz1", user.PlzFk);
             return View(user);
         }
 
         // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -144,8 +149,7 @@ namespace DHB_Win.Controllers
             }
 
             var user = await _context.Users
-                .Include(u => u.PlzFkNavigation)
-                .FirstOrDefaultAsync(m => m.Uid == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -157,7 +161,7 @@ namespace DHB_Win.Controllers
         // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             if (_context.Users == null)
             {
@@ -174,9 +178,9 @@ namespace DHB_Win.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(String id)
         {
-            return (_context.Users?.Any(e => e.Uid == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

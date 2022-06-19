@@ -1,11 +1,13 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using DHB_Win.Models;
+﻿using System.Linq;
+using DHB_Win.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DHB_Win.Controllers
 {
+    [AllowAnonymous]
     [Route("home")]
     public class HomeController : Controller
     {
@@ -15,7 +17,7 @@ namespace DHB_Win.Controllers
         public HomeController(ILogger<HomeController> logger, dhbwinContext context)
         {
             _logger = logger;
-            _context=context;
+            _context = context;
         }
 
         [Route("")]
@@ -23,8 +25,8 @@ namespace DHB_Win.Controllers
         [Route("~/")]
         public IActionResult Index()
         {
-            ViewBag.Bets = _context.Bets.Select(x => x).ToList();
-            ViewBag.Jobs = _context.Jobs.Select(x => x).ToList();
+            ViewBag.Bets = _context.Bets.Include(x => x.User).Select(x => x).ToList();
+            ViewBag.Jobs = _context.Jobs.Include(x => x.Provider).Include(x => x.Worker).Select(x => x).ToList();
             ViewBag.AchievedAchievement = _context.AchievedAchievements.Select(x => x).ToList();
             ViewBag.Achievement = _context.Achievements.Select(x => x).ToList();
             return View();

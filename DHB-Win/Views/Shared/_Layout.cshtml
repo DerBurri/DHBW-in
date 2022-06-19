@@ -188,11 +188,12 @@
     <div class="sidebar">
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
+           <!-- <div class="image">
                 <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
+            </div>-->
             <div class="info">
-                @Html.ActionLink("USERNAME", "Index", "User", new {})
+                <partial name="_LoginPartial"></partial>
+                @*Html.ActionLink("USERNAME", "Index", "User", new {})*@
 
             </div>
         </div>

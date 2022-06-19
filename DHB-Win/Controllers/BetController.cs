@@ -1,28 +1,31 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using DHB_Win.Data;
 using DHB_Win.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DHB_Win.Controllers
 {
     public class BetController : Controller
     {
         private readonly dhbwinContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public BetController(dhbwinContext context)
+        public BetController(dhbwinContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Bet
         public async Task<IActionResult> Index()
         {
-            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dhbwinContext.ToListAsync());
+            return _context.Bets != null
+                ? View(await _context.Bets.Include(u => u.User).ToListAsync())
+                : Problem("Entity set 'dhbwinContext.Bets'  is null.");
         }
 
         // GET: Bet/Details/5
@@ -34,7 +37,6 @@ namespace DHB_Win.Controllers
             }
 
             var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
                 .FirstOrDefaultAsync(m => m.BetId == id);
             if (bet == null)
             {
@@ -44,20 +46,31 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
+        
+        //Get History
+        public async Task<IActionResult> History()
+        {
+            return View(await _context.Bets.Include(u => u.User).Select(x => x).Where(x => x.finished).ToListAsync());
+        }
+        
         // GET: Bet/Create
         public IActionResult Create()
         {
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid");
             return View();
         }
+
 
         // POST: Bet/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
+        public async Task<IActionResult> Create([Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
         {
+            bet.User = await _userManager.GetUserAsync(HttpContext.User);
+            bet.CreationDate = DateTime.UtcNow;
+            ModelState.Clear();
+            TryValidateModel(bet);
             if (ModelState.IsValid)
             {
                 _context.Add(bet);
@@ -65,7 +78,6 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
             return View(bet);
         }
 
@@ -83,7 +95,6 @@ namespace DHB_Win.Controllers
                 return NotFound();
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
             return View(bet);
         }
 
@@ -92,7 +103,9 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BetId,UidFk2,Title,ExpPoints,Reward,Description,CreationDate")] Bet bet)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("BetId,Title,ExpPoints,Reward,Description,CreationDate")]
+            Bet bet)
         {
             if (id != bet.BetId)
             {
@@ -121,16 +134,8 @@ namespace DHB_Win.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["UidFk2"] = new SelectList(_context.Users, "Uid", "Uid", bet.UidFk2);
             return View(bet);
         }
-
-        public async Task<IActionResult> History()
-        {
-            var dhbwinContext = _context.Bets.Include(b => b.UidFk2Navigation);
-            return View(await dhbwinContext.ToListAsync());
-        }
-
 
         // GET: Bet/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -141,7 +146,6 @@ namespace DHB_Win.Controllers
             }
 
             var bet = await _context.Bets
-                .Include(b => b.UidFk2Navigation)
                 .FirstOrDefaultAsync(m => m.BetId == id);
             if (bet == null)
             {

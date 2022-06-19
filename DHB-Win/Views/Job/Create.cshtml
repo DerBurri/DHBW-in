@@ -13,14 +13,14 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProviderId" class="control-label"></label>
-                <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="WorkerId" class="control-label"></label>
-                <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
-            </div>
+            @* <div class="form-group"> *@
+            @*     <label asp-for="ProviderId" class="control-label"></label> *@
+            @*     <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId"></select> *@
+            @* </div> *@
+            @* <div class="form-group"> *@
+            @*     <label asp-for="WorkerId" class="control-label"></label> *@
+            @*     <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select> *@
+            @* </div> *@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control"/>
@@ -41,16 +41,16 @@
                 <input asp-for="ExpPoints" class="form-control"/>
                 <span asp-validation-for="ExpPoints" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreationDate" class="control-label"></label>
-                <input asp-for="CreationDate" class="form-control"/>
-                <span asp-validation-for="CreationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FinishDate" class="control-label"></label>
-                <input asp-for="FinishDate" class="form-control"/>
-                <span asp-validation-for="FinishDate" class="text-danger"></span>
-            </div>
+            @* <div class="form-group"> *@
+            @*     <label asp-for="CreationDate" class="control-label"></label> *@
+            @*     <input asp-for="CreationDate" class="form-control"/> *@
+            @*     <span asp-validation-for="CreationDate" class="text-danger"></span> *@
+            @* </div> *@
+            @* <div class="form-group"> *@
+            @*     <label asp-for="FinishDate" class="control-label"></label> *@
+            @*     <input asp-for="FinishDate" class="form-control"/> *@
+            @*     <span asp-validation-for="FinishDate" class="text-danger"></span> *@
+            @* </div> *@
             <div class="form-group">
                 <input type="submit" value="Erstellen" class="btn btn-primary"/>
             </div>
@@ -59,6 +59,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Zurück zu Aufträgen</a>
+    <a asp-action="Index">Zurï¿½ck zu Auftrï¿½gen</a>
 </div>
 

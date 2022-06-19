@@ -8,6 +8,7 @@ create table dhbwin.PLZ
     go
 
 create unique index PLZ_PLZ_uindex
-    on dhbwin.PLZ (PLZ)
+    on dhbwin.PLZ (PLZ) go
+
     go
 
