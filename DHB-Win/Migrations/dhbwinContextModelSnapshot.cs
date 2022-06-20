@@ -254,6 +254,10 @@ namespace DHB_Win.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlacementId"), 1L, 1);
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int")
+                        .HasColumnName("Amount");
+
                     b.Property<int>("BetIdFk")
                         .HasColumnType("int")
                         .HasColumnName("BetID_fk");
