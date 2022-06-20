@@ -47,11 +47,6 @@
         <None Include="Views/Job/Details.cshtml" />
         <None Include="Views/Job/Edit.cshtml" />
         <None Include="Views/Job/Index.cshtml" />
-        <None Include="Views/Placement/Create.cshtml" />
-        <None Include="Views/Placement/Delete.cshtml" />
-        <None Include="Views/Placement/Details.cshtml" />
-        <None Include="Views/Placement/Edit.cshtml" />
-        <None Include="Views/Placement/Index.cshtml" />
         <None Include="Views/Shared/Error.cshtml" />
         <None Include="Views/Shared/_Layout.cshtml" />
         <None Include="Views/Shared/_LoginLayout.cshtml" />

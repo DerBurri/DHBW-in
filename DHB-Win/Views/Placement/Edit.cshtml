@@ -8,21 +8,29 @@
 <h1>Edit</h1>
 
 <h4>Placement</h4>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PlacementId"/>
-            <input type="hidden" asp-for="BetIdFk"/>
-            <input type="hidden" asp-for="UidFk"/>
+            <input type="hidden" asp-for="PlacementId" />
+            <div class="form-group">
+                <label asp-for="BetIdFk" class="control-label"></label>
+                <select asp-for="BetIdFk" class="form-control" asp-items="ViewBag.BetIdFk"></select>
+                <span asp-validation-for="BetIdFk" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UidFk" class="control-label"></label>
+                <select asp-for="UidFk" class="form-control" asp-items="ViewBag.UidFk"></select>
+                <span asp-validation-for="UidFk" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="OptionIdFk" class="control-label"></label>
                 <select asp-for="OptionIdFk" class="form-control" asp-items="ViewBag.OptionIdFk"></select>
                 <span asp-validation-for="OptionIdFk" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -32,3 +40,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
