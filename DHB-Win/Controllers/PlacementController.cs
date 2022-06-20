@@ -63,6 +63,7 @@ namespace DHB_Win.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlacementId,BetIdFk,UidFk,OptionIdFk")] Placement placement)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(placement);
@@ -74,6 +75,7 @@ namespace DHB_Win.Controllers
             ViewData["UidFk"] = new SelectList(_context.Users, "Id", "Id", placement.UidFk);
             return View(placement);
         }
+        
 
         // GET: Placement/Edit/5
         public async Task<IActionResult> Edit(int? id)

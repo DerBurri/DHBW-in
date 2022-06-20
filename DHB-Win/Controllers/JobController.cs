@@ -31,7 +31,20 @@ namespace DHB_Win.Controllers
             var dhbwinContext = _context.Jobs.Include(j => j.Provider).Include(j => j.Worker);
             return View(await dhbwinContext.ToListAsync());
         }
+        public async Task<IActionResult> Teilnehmen(int? id)
+        {
+            var job = await _context.Jobs.Include(x=> x.Provider).Include(x=>x.Worker).Select(x => x).Where(x => x.JobId == id).ToListAsync();
+            job.FirstOrDefault().Worker = await _context.Users.FindAsync(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            TryValidateModel(job);
+            if (ModelState.IsValid)
+            {
+                _context.Update(job[0]);
+            }
 
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Job/Details/5
         public async Task<IActionResult> Details(int? id)
         {
