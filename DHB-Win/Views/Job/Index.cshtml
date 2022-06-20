@@ -76,7 +76,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider.Name) @*Profilbild und Username*@
+                @Html.DisplayFor(modelItem => item.Provider.UserName) @*Profilbild und Username*@
             </td>
             <td class="project-state">
                 <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -94,7 +94,7 @@
                 @Html.DisplayFor(modelItem => item.FinishDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Worker.Id)
+                @Html.DisplayFor(modelItem => item.Worker.UserName)
 
                 @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
@@ -126,7 +126,6 @@
 
 
 <h1>Verfügbare Aufträge</h1>
-
 <table class="table table-striped projects">
     <thead>
     <tr>
@@ -158,7 +157,7 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Where(x=> x.Worker == null))
     {
         <tr>
             <td>
@@ -173,7 +172,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider.Name) @*Profilbild und Username*@
+                @Html.DisplayFor(modelItem => item.Provider.UserName) @*Profilbild und Username*@
             </td>
             <td class="project-state">
                 <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -191,13 +190,13 @@
                 @Html.DisplayFor(modelItem => item.FinishDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Worker.Id)
+                @Html.DisplayFor(modelItem => item.Worker.UserName)
 
                 @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
                 irgendwie direkt die Teilnahme erm�glichen*@
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="submit" value="Teilnehmen" class="btn btn-primary"/>
+            <a asp-action="Teilnehmen" asp-route-id="@item.JobId" class="btn btn-primary">Teilnehmen</a>
             </td>
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.JobId">
@@ -268,7 +267,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Provider.Id) @*Profilbild und Username*@
+                @Html.DisplayFor(modelItem => item.Provider.UserName) @*Profilbild und Username*@
             </td>
             <td class="project-state">
                 <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
@@ -286,7 +285,7 @@
                 @Html.DisplayFor(modelItem => item.FinishDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Worker.Id)
+                @Html.DisplayFor(modelItem => item.Worker.UserName)
 
                 @* <select asp-for="WorkerId" class="form-control" asp-items="ViewBag.WorkerId"></select>
                 <span asp-validation-for="WorkerId" class="text-danger"></span>
