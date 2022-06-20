@@ -1,11 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using DHB_Win.Data;
-using DHB_Win.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DHB_Win.Data;
+using DHB_Win.Models;
 
 namespace DHB_Win.Controllers
 {
@@ -20,15 +21,13 @@ namespace DHB_Win.Controllers
 
         // GET: Placement
         public async Task<IActionResult> Index()
-        {ViewBag.User = _context.Users.Select(x => x)
-                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
-            var dhbwinContext = _context.Placements.Include(p => p.Bet)
-                .Include(p => p.BetOption).Include(p => p.User);
+        {
+            var dhbwinContext = _context.Placements.Include(p => p.Bet).Include(p => p.BetOption).Include(p => p.User);
             return View(await dhbwinContext.ToListAsync());
         }
 
         // GET: Placement/Details/5
-        public async Task<IActionResult> Details(string? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -39,7 +38,7 @@ namespace DHB_Win.Controllers
                 .Include(p => p.Bet)
                 .Include(p => p.BetOption)
                 .Include(p => p.User)
-                .FirstOrDefaultAsync(m => m.UidFk == id);
+                .FirstOrDefaultAsync(m => m.PlacementId == id);
             if (placement == null)
             {
                 return NotFound();
@@ -51,9 +50,9 @@ namespace DHB_Win.Controllers
         // GET: Placement/Create
         public IActionResult Create()
         {
-            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "BetId");
+            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "Description");
             ViewData["OptionIdFk"] = new SelectList(_context.BetOptions, "OptionsId", "OptionsId");
-            ViewData["UidFk"] = new SelectList(_context.Users, "Uid", "Uid");
+            ViewData["UidFk"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -70,16 +69,14 @@ namespace DHB_Win.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "BetId", placement.BetIdFk);
-            ViewData["OptionIdFk"] =
-                new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
-            ViewData["UidFk"] = new SelectList(_context.Users, "Uid", "Uid", placement.UidFk);
+            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "Description", placement.BetIdFk);
+            ViewData["OptionIdFk"] = new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
+            ViewData["UidFk"] = new SelectList(_context.Users, "Id", "Id", placement.UidFk);
             return View(placement);
         }
 
         // GET: Placement/Edit/5
-        public async Task<IActionResult> Edit(string? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -91,11 +88,9 @@ namespace DHB_Win.Controllers
             {
                 return NotFound();
             }
-
-            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "BetId", placement.BetIdFk);
-            ViewData["OptionIdFk"] =
-                new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
-            ViewData["UidFk"] = new SelectList(_context.Users, "Uid", "Uid", placement.UidFk);
+            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "Description", placement.BetIdFk);
+            ViewData["OptionIdFk"] = new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
+            ViewData["UidFk"] = new SelectList(_context.Users, "Id", "Id", placement.UidFk);
             return View(placement);
         }
 
@@ -104,11 +99,9 @@ namespace DHB_Win.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id,
-            [Bind("PlacementId,BetIdFk,UidFk,OptionIdFk")]
-            Placement placement)
+        public async Task<IActionResult> Edit(int id, [Bind("PlacementId,BetIdFk,UidFk,OptionIdFk")] Placement placement)
         {
-            if (id != placement.UidFk)
+            if (id != placement.PlacementId)
             {
                 return NotFound();
             }
@@ -122,7 +115,7 @@ namespace DHB_Win.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlacementExists(placement.UidFk))
+                    if (!PlacementExists(placement.PlacementId))
                     {
                         return NotFound();
                     }
@@ -131,19 +124,16 @@ namespace DHB_Win.Controllers
                         throw;
                     }
                 }
-
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "BetId", placement.BetIdFk);
-            ViewData["OptionIdFk"] =
-                new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
-            ViewData["UidFk"] = new SelectList(_context.Users, "Uid", "Uid", placement.UidFk);
+            ViewData["BetIdFk"] = new SelectList(_context.Bets, "BetId", "Description", placement.BetIdFk);
+            ViewData["OptionIdFk"] = new SelectList(_context.BetOptions, "OptionsId", "OptionsId", placement.OptionIdFk);
+            ViewData["UidFk"] = new SelectList(_context.Users, "Id", "Id", placement.UidFk);
             return View(placement);
         }
 
         // GET: Placement/Delete/5
-        public async Task<IActionResult> Delete(string? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Placements == null)
             {
@@ -154,7 +144,7 @@ namespace DHB_Win.Controllers
                 .Include(p => p.Bet)
                 .Include(p => p.BetOption)
                 .Include(p => p.User)
-                .FirstOrDefaultAsync(m => m.UidFk == id);
+                .FirstOrDefaultAsync(m => m.PlacementId == id);
             if (placement == null)
             {
                 return NotFound();
@@ -172,20 +162,19 @@ namespace DHB_Win.Controllers
             {
                 return Problem("Entity set 'dhbwinContext.Placements'  is null.");
             }
-
             var placement = await _context.Placements.FindAsync(id);
             if (placement != null)
             {
                 _context.Placements.Remove(placement);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlacementExists(string id)
+        private bool PlacementExists(int id)
         {
-            return (_context.Placements?.Any(e => e.UidFk == id)).GetValueOrDefault();
+          return (_context.Placements?.Any(e => e.PlacementId == id)).GetValueOrDefault();
         }
     }
 }

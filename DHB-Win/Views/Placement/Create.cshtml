@@ -8,25 +8,25 @@
 <h1>Create</h1>
 
 <h4>Placement</h4>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BetIdFk" class="control-label"></label>
-                <select asp-for="BetIdFk" class="form-control" asp-items="ViewBag.BetIdFk"></select>
+                <select asp-for="BetIdFk" class ="form-control" asp-items="ViewBag.BetIdFk"></select>
             </div>
             <div class="form-group">
                 <label asp-for="UidFk" class="control-label"></label>
-                <select asp-for="UidFk" class="form-control" asp-items="ViewBag.UidFk"></select>
+                <select asp-for="UidFk" class ="form-control" asp-items="ViewBag.UidFk"></select>
             </div>
             <div class="form-group">
                 <label asp-for="OptionIdFk" class="control-label"></label>
-                <select asp-for="OptionIdFk" class="form-control" asp-items="ViewBag.OptionIdFk"></select>
+                <select asp-for="OptionIdFk" class ="form-control" asp-items="ViewBag.OptionIdFk"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary"/>
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -36,3 +36,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
