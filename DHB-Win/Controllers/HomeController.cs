@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using DHB_Win.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,8 @@ namespace DHB_Win.Controllers
             ViewBag.Jobs = _context.Jobs.Include(x => x.Provider).Include(x => x.Worker).Select(x => x).ToList();
             ViewBag.AchievedAchievement = _context.AchievedAchievements.Select(x => x).ToList();
             ViewBag.Achievement = _context.Achievements.Select(x => x).ToList();
+            ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
             return View();
         }
 
