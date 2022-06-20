@@ -218,6 +218,8 @@ namespace DHB_Win.Data
 
                 entity.Property(e => e.OptionIdFk).HasColumnName("OptionID_fk");
 
+                entity.Property(e => e.Amount).HasColumnName("Amount");
+                
                 entity.HasOne(d => d.Bet)
                     .WithMany(p => p.Placements)
                     .HasForeignKey(d => d.BetIdFk)

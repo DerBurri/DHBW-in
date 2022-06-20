@@ -2,12 +2,14 @@
 
 namespace DHB_Win.Models
 {
-    public partial class Placement
+    public class Placement
     {
         public int PlacementId { get; set; }
         public int BetIdFk { get; set; }
         public string UidFk { get; set; }
         public int OptionIdFk { get; set; }
+        
+        public int Amount { get; set; }
 
         public virtual Bet Bet { get; set; } = null!;
         public virtual BetOption? BetOption { get; set; }
