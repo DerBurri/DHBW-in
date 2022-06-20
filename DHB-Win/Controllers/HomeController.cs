@@ -32,7 +32,7 @@ namespace DHB_Win.Controllers
             ViewBag.Achievement = _context.Achievements.Select(x => x).ToList();
             ViewBag.User = _context.Users.Select(x => x)
                 .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
-         ViewBag.Betoption = _context.BetOptions.Select(x => x).Include(x=>x.Bet).ToList();
+         ViewBag.Betoption = _context.BetOptions.Include(x=>x.Bet).Select(x => x).ToList();
             return View();
         }
 

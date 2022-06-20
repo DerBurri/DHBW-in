@@ -82,18 +82,25 @@
                             @Html.DisplayFor(modelItem => item.Reward) Betcoins
                         </small>
                     <td>
-           
-                           @*
-                                <div class="dropdown-menu" role="menu">
-                                        @foreach (@DHB_Win.Models.BetOption option in ViewBag.bet)
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info">Optionen</button>
+                            <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu" role="menu">
+                                    @foreach (@DHB_Win.Models.BetOption option in ViewBag.Betoption)
+                                    {
+                                        @if (@option.BetId==@item.BetId)
                                         {
-                                             <a class="dropdown-item" href="#"></a>
+                                        <a class="dropdown-item" asp-controller="Placement" asp-action="Create">@option.Title</a>
                                         }
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    }
                                   
-                                </div>          *@        
+
+                            </div>
+                        </div>
+
                     </td>
 
                     <td class="project-actions text-right">

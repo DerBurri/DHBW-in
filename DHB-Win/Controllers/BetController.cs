@@ -26,6 +26,7 @@ namespace DHB_Win.Controllers
         {
             ViewBag.User = _context.Users.Select(x => x)
                 .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
+            ViewBag.Betoption = _context.BetOptions.Include(x => x.Bet).Select(x => x).ToList();
             return _context.Bets != null
                 ? View(await _context.Bets.Include(u => u.User).ToListAsync())
                 : Problem("Entity set 'dhbwinContext.Bets'  is null.");

@@ -46,7 +46,7 @@ namespace DHB_Win.Controllers
 
             return View(placement);
         }
-
+     
         // GET: Placement/Create
         public IActionResult Create()
         {
