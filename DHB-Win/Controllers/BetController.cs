@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
@@ -50,6 +51,8 @@ namespace DHB_Win.Controllers
         //Get History
         public async Task<IActionResult> History()
         {
+            ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             return View(await _context.Bets.Include(u => u.User).Select(x => x).Where(x => x.Finished).ToListAsync());
         }
         

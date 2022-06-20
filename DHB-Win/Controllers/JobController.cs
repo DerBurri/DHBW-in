@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
@@ -25,7 +26,8 @@ namespace DHB_Win.Controllers
         public async Task<IActionResult> Index()
         {
             //ViewBag.achievements = _context.Achievements.Select(x => x).ToList();
-
+            ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             var dhbwinContext = _context.Jobs.Include(j => j.Provider).Include(j => j.Worker);
             return View(await dhbwinContext.ToListAsync());
         }

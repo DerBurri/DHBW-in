@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
@@ -22,6 +23,8 @@ namespace DHB_Win.Controllers
         {
             var dhbwinContext = _context.AchievedAchievements.Include(a => a.AchIdFkNavigation)
                 .Include(a => a.UidFkNavigation);
+            ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             return View(await dhbwinContext.ToListAsync());
         }
 

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
@@ -19,7 +20,8 @@ namespace DHB_Win.Controllers
 
         // GET: Placement
         public async Task<IActionResult> Index()
-        {
+        {ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             var dhbwinContext = _context.Placements.Include(p => p.Bet)
                 .Include(p => p.BetOption).Include(p => p.User);
             return View(await dhbwinContext.ToListAsync());

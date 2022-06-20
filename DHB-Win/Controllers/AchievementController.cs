@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DHB_Win.Data;
 using DHB_Win.Models;
@@ -21,6 +22,8 @@ namespace DHB_Win.Controllers
         // GET: Achievement
         public async Task<IActionResult> Index()
         {
+            ViewBag.User = _context.Users.Select(x => x)
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
             return _context.Achievements != null
                 ? View(await _context.Achievements.ToListAsync())
                 : Problem("Entity set 'dhbwinContext.Achievements'  is null.");
