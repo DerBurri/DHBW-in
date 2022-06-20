@@ -58,9 +58,6 @@
         <None Include="Views/Shared/_LoginPartial.cshtml" />
         <None Include="Views/Shared/_ValidationScriptsPartial.cshtml" />
         <None Include="Views/User_temp/Create.cshtml" />
-        <None Include="Views\User\Index.cshtml" />
-        <None Include="Views\User\Login.cshtml" />
-        <None Include="Views\User\Login.cshtml.cs" />
         <None Include="Views/_ViewImports.cshtml" />
         <None Include="Views/_ViewStart.cshtml" />
     </ItemGroup>

@@ -20,8 +20,8 @@ namespace DHB_Win.Controllers
         // GET: Placement
         public async Task<IActionResult> Index()
         {
-            var dhbwinContext = _context.Placements.Include(p => p.BetIdFkNavigation)
-                .Include(p => p.OptionIdFkNavigation).Include(p => p.UidFkNavigation);
+            var dhbwinContext = _context.Placements.Include(p => p.Bet)
+                .Include(p => p.BetOption).Include(p => p.User);
             return View(await dhbwinContext.ToListAsync());
         }
 
@@ -34,9 +34,9 @@ namespace DHB_Win.Controllers
             }
 
             var placement = await _context.Placements
-                .Include(p => p.BetIdFkNavigation)
-                .Include(p => p.OptionIdFkNavigation)
-                .Include(p => p.UidFkNavigation)
+                .Include(p => p.Bet)
+                .Include(p => p.BetOption)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.UidFk == id);
             if (placement == null)
             {
@@ -149,9 +149,9 @@ namespace DHB_Win.Controllers
             }
 
             var placement = await _context.Placements
-                .Include(p => p.BetIdFkNavigation)
-                .Include(p => p.OptionIdFkNavigation)
-                .Include(p => p.UidFkNavigation)
+                .Include(p => p.Bet)
+                .Include(p => p.BetOption)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.UidFk == id);
             if (placement == null)
             {

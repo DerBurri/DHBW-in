@@ -5,7 +5,7 @@ namespace DHB_Win.Models
 {
     public partial class User : IdentityUser
     {
-        public int? ExpPoints;
+        
 
         [PersonalData] public string? Firstname;
         [PersonalData] public string? Name;
@@ -13,8 +13,8 @@ namespace DHB_Win.Models
         //[PersonalData] public byte? Profilepicture;
         [PersonalData] public string? Stadt;
         [PersonalData] public string? Street;
-
-        public int? WalletBalance;
+        [PersonalData] public int? WalletBalance;
+        [PersonalData] public int? ExpPoints;
 
         public User()
         {

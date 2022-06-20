@@ -13,6 +13,7 @@ namespace DHB_Win.Models
         public int? BetId { get; set; }
         public string? Title { get; set; }
         public string? Descpription { get; set; }
+        
         public int? QuoteValue { get; set; }
 
         public virtual Bet? Bet { get; set; }

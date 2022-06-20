@@ -87,6 +87,8 @@ namespace DHB_Win.Areas.Identity.Pages.Account
                 user.Plz = Input.Plz;
                 user.Stadt = Input.Stadt;
                 user.Street = Input.Street;
+                user.WalletBalance = 0;
+                user.ExpPoints = 0;
                 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

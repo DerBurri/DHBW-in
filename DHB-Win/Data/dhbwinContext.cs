@@ -116,6 +116,8 @@ namespace DHB_Win.Data
                     .IsUnicode(false)
                     .IsFixedLength();
 
+                entity.Property(e => e.Finished);
+
                 entity.Property<string>("UserForeignKey");
 
                 entity.HasOne(d => d.User)
@@ -174,7 +176,7 @@ namespace DHB_Win.Data
                 entity.Property(e => e.JobId).HasColumnName("JobID");
 
                 entity.Property(e => e.CreationDate).HasColumnType("datetime");
-
+                
                 entity.Property(e => e.Description)
                     .HasMaxLength(50)
                     .IsUnicode(false)
@@ -200,7 +202,7 @@ namespace DHB_Win.Data
 
             modelBuilder.Entity<Placement>(entity =>
             {
-                entity.HasKey(e => new {e.UidFk, e.PlacementId, e.BetIdFk})
+                entity.HasKey(e => e.PlacementId)
                     .HasName("Placement_pk")
                     .IsClustered(false);
 
@@ -216,18 +218,18 @@ namespace DHB_Win.Data
 
                 entity.Property(e => e.OptionIdFk).HasColumnName("OptionID_fk");
 
-                entity.HasOne(d => d.BetIdFkNavigation)
+                entity.HasOne(d => d.Bet)
                     .WithMany(p => p.Placements)
                     .HasForeignKey(d => d.BetIdFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("Bet_fk");
 
-                entity.HasOne(d => d.OptionIdFkNavigation)
+                entity.HasOne(d => d.BetOption)
                     .WithMany(p => p.Placements)
                     .HasForeignKey(d => d.OptionIdFk)
                     .HasConstraintName("Placement_BetOptions_OptionsID_fk");
 
-                entity.HasOne(d => d.UidFkNavigation)
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Placements)
                     .HasForeignKey(d => d.UidFk)
                     .OnDelete(DeleteBehavior.ClientSetNull)
@@ -267,6 +269,12 @@ namespace DHB_Win.Data
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .IsFixedLength();
+
+                entity.Property(e => e.WalletBalance);
+
+                entity.Property(e => e.ExpPoints);
+                
+                
             });
             base.OnModelCreating(modelBuilder);
 
