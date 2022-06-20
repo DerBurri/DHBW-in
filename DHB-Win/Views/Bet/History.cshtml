@@ -1,19 +1,77 @@
-@page
-@model DHB_Win.Models.Bet
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using DHB_Win.Models
+@model IEnumerable<DHB_Win.Models.Bet>
+
+@inject IAuthorizationService AuthorizationService
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+<h1>History</h1>
 
-<!DOCTYPE html>
+    <table class="table table-striped projects">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reward)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
+        <th>Optionen</th>
+
+    </tr>
+    </thead>
     
-</div>
-</body>
-</html>
+    <tbody>
+    @foreach (var item in Model.Where(x => x.Finished == true))
+    {
+        <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td class="project-state">
+        <span class="badge badge-success">@Html.DisplayFor(modelItem => item.ExpPoints)</span>
+    </td>
+     
+    <td class="project_progress">
+        <div class="progress progress-sm">
+            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="@Html.DisplayFor(modelItem => item.Reward)" aria-valuemin="0" aria-valuemax="100" style="width:@Html.DisplayFor(modelItem => item.Reward)%">
+            </div>
+        </div>
+        <small>
+            @Html.DisplayFor(modelItem => item.Reward) Betcoins
+        </small>
+    </td>
+     
+    <td>
+        <a>
+            @Html.DisplayFor(modelItem => item.Description)
+        </a>
+        <br>
+    </td>
+    <td>
+        <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
+    </td>
+
+</tr>
+    }
+    </tbody>
+</table>
