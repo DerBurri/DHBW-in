@@ -78,28 +78,7 @@
             <td>
                 <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
             </td>
-            <td>
-                
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-info">Optionen</button>
-                            <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu" role="menu">
-                                    @foreach (@DHB_Win.Models.BetOption option in ViewBag.Betoption)
-                                    {
-                                        @if (@option.BetId==@item.BetId)
-                                        {
-                                        <a class="dropdown-item" asp-controller="Placement" asp-action="Create">@option.Title</a>
-                                        }
-                                    }
-                                      <a class="dropdown-item" asp-controller="Placement" asp-action="Create">test</a>
-
-                            </div>
-                        </div>
-            </td>
-
-
+            
             <td class="project-actions text-right">
                 <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.BetId">
                     <i class="fas fa-folder">
@@ -119,7 +98,32 @@
             </td>
         </tr>
     }
-    <h2>Verfügbare Wetten</h2>
+    </tbody>
+    </table>
+<h2>Verfügbare Wetten</h2>
+<table class="table table-striped projects">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reward)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>Optionen</th>
+
+    </tr>
+    </thead>
+    <tbody>
     @foreach (var item in Model.Select(x => x).Where(x => x.User != UserManager.GetUserAsync(User).Result))
          {
              <tr>
@@ -149,7 +153,26 @@
                  <td>
                      <small>Created @Html.DisplayFor(modelItem => item.CreationDate)</small>
                  </td>
+              <td>
+                     
+                     <div class="btn-group">
+                         <button type="button" class="btn btn-info">Optionen</button>
+                         <button type="button" class="btn btn-info dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                             <span class="sr-only">Toggle Dropdown</span>
+                         </button>
+                         <div class="dropdown-menu" role="menu">
+                             @foreach (@DHB_Win.Models.BetOption option in ViewBag.Betoption)
+                             {
+                                 @if (@option.BetId==@item.BetId)
+                                 {
+                                     <a class="dropdown-item" asp-controller="Placement" asp-action="Create">@option.Title</a>
+                                 }
+                             }
+                             <a class="dropdown-item" asp-controller="Placement" asp-action="Create">test</a>
      
+                         </div>
+                     </div>
+                 </td>
      
                  <td class="project-actions text-right">
                      <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.BetId">
