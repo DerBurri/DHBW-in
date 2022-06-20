@@ -31,7 +31,8 @@ namespace DHB_Win.Controllers
             ViewBag.AchievedAchievement = _context.AchievedAchievements.Select(x => x).ToList();
             ViewBag.Achievement = _context.Achievements.Select(x => x).ToList();
             ViewBag.User = _context.Users.Select(x => x)
-                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier));
+                .Where(x => x.Id == User.FindFirstValue(ClaimTypes.NameIdentifier)).ToList();
+         ViewBag.Betoption = _context.BetOptions.Select(x => x).Include(x=>x.Bet).ToList();
             return View();
         }
 
@@ -41,13 +42,5 @@ namespace DHB_Win.Controllers
             //string? test = _context.Achievement.Find("test").Title;
             return View();
         }
-
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        // public IActionResult Error()
-        // {
-        //    return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-        // }
-        //brauchen wir sowas? 
     }
 }

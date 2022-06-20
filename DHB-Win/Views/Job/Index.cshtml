@@ -16,7 +16,10 @@
     var isAdministratorResult = await AuthorizationService.AuthorizeAsync(User, "isAdministrator");
 
 }
-
+@foreach (@DHB_Win.Models.User item in ViewBag.User)
+{
+    <button type="button" class="btn btn-block bg-gradient-success btn-lg">@item.WalletBalance Betcoins</button>
+}
 
 <h1>Aufträge</h1>
 <p>
