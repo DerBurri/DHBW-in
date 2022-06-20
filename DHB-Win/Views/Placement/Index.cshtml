@@ -14,13 +14,13 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BetIdFkNavigation)
+            @Html.DisplayNameFor(model => model.Bet)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OptionIdFkNavigation)
+            @Html.DisplayNameFor(model => model.BetOption)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UidFkNavigation)
+            @Html.DisplayNameFor(model => model.User)
         </th>
         <th></th>
     </tr>
@@ -30,13 +30,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.BetIdFkNavigation.BetId)
+                @Html.DisplayFor(modelItem => item.Bet.BetId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OptionIdFkNavigation.OptionsId)
+                @Html.DisplayFor(modelItem => item.BetOption.OptionsId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UidFkNavigation.Id)
+                @Html.DisplayFor(modelItem => item.User.Id)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |

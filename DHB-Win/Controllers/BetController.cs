@@ -50,7 +50,7 @@ namespace DHB_Win.Controllers
         //Get History
         public async Task<IActionResult> History()
         {
-            return View(await _context.Bets.Include(u => u.User).Select(x => x).Where(x => x.finished).ToListAsync());
+            return View(await _context.Bets.Include(u => u.User).Select(x => x).Where(x => x.Finished).ToListAsync());
         }
         
         // GET: Bet/Create
@@ -137,6 +137,7 @@ namespace DHB_Win.Controllers
             return View(bet);
         }
 
+        
         // GET: Bet/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -147,6 +148,7 @@ namespace DHB_Win.Controllers
 
             var bet = await _context.Bets
                 .FirstOrDefaultAsync(m => m.BetId == id);
+            
             if (bet == null)
             {
                 return NotFound();

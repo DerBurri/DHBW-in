@@ -36,7 +36,7 @@ namespace DHB_Win.Models
         [Required(ErrorMessage = "Beschreibung ist notwendig")]
         public string? Description { get; set; }
 
-        public bool finished { get; set; }
+        public bool Finished { get; set; }
         [Display(Name = "Datum")] public DateTime? CreationDate { get; set; }
 
         [InverseProperty("Bets")] public virtual User User { get; set; }

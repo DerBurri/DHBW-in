@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DHB_Win.Models
 {
@@ -9,7 +10,7 @@ namespace DHB_Win.Models
         public DateTime? CreationDate { get; set; }
         public int Aaid { get; set; }
 
-        public virtual Achievement AchIdFkNavigation { get; set; }
-        public virtual User UidFkNavigation { get; set; }
+         public virtual Achievement AchIdFkNavigation { get; set; }
+         [InverseProperty("AchievedAchievements")] public virtual User UidFkNavigation { get; set; }
     }
 }

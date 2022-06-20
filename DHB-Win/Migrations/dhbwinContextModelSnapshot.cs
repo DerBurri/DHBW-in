@@ -113,6 +113,9 @@ namespace DHB_Win.Migrations
                         .IsRequired()
                         .HasColumnType("int");
 
+                    b.Property<bool>("Finished")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("Reward")
                         .IsRequired()
                         .HasColumnType("int");
@@ -126,9 +129,6 @@ namespace DHB_Win.Migrations
 
                     b.Property<string>("UserForeignKey")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("finished")
-                        .HasColumnType("bit");
 
                     b.HasKey("BetId")
                         .HasName("Bet_pk");
@@ -247,10 +247,6 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Placement", b =>
                 {
-                    b.Property<string>("UidFk")
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("UID_fk");
-
                     b.Property<int>("PlacementId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -262,18 +258,25 @@ namespace DHB_Win.Migrations
                         .HasColumnType("int")
                         .HasColumnName("BetID_fk");
 
-                    b.Property<int?>("OptionIdFk")
+                    b.Property<int>("OptionIdFk")
                         .HasColumnType("int")
                         .HasColumnName("OptionID_fk");
 
-                    b.HasKey("UidFk", "PlacementId", "BetIdFk")
+                    b.Property<string>("UidFk")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("UID_fk");
+
+                    b.HasKey("PlacementId")
                         .HasName("Placement_pk");
 
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("UidFk", "PlacementId", "BetIdFk"), false);
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("PlacementId"), false);
 
                     b.HasIndex("BetIdFk");
 
                     b.HasIndex("OptionIdFk");
+
+                    b.HasIndex("UidFk");
 
                     b.ToTable("Placement", "dhbwin");
                 });
@@ -296,6 +299,9 @@ namespace DHB_Win.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int?>("ExpPoints")
+                        .HasColumnType("int");
 
                     b.Property<string>("Firstname")
                         .HasMaxLength(25)
@@ -362,6 +368,9 @@ namespace DHB_Win.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int?>("WalletBalance")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -567,28 +576,30 @@ namespace DHB_Win.Migrations
 
             modelBuilder.Entity("DHB_Win.Models.Placement", b =>
                 {
-                    b.HasOne("DHB_Win.Models.Bet", "BetIdFkNavigation")
+                    b.HasOne("DHB_Win.Models.Bet", "Bet")
                         .WithMany("Placements")
                         .HasForeignKey("BetIdFk")
                         .IsRequired()
                         .HasConstraintName("Bet_fk");
 
-                    b.HasOne("DHB_Win.Models.BetOption", "OptionIdFkNavigation")
+                    b.HasOne("DHB_Win.Models.BetOption", "BetOption")
                         .WithMany("Placements")
                         .HasForeignKey("OptionIdFk")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("Placement_BetOptions_OptionsID_fk");
 
-                    b.HasOne("DHB_Win.Models.User", "UidFkNavigation")
+                    b.HasOne("DHB_Win.Models.User", "User")
                         .WithMany("Placements")
                         .HasForeignKey("UidFk")
                         .IsRequired()
                         .HasConstraintName("User_fk");
 
-                    b.Navigation("BetIdFkNavigation");
+                    b.Navigation("Bet");
 
-                    b.Navigation("OptionIdFkNavigation");
+                    b.Navigation("BetOption");
 
-                    b.Navigation("UidFkNavigation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
